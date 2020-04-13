@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Jobsdb from "./containers/jobsdb";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  //  <h1>Jobs Database</h1>,
+<Jobsdb/>,
+  //  <React.StrictMode>
+ //   <App />
+ // </React.StrictMode>,
   document.getElementById('root')
 );
 
