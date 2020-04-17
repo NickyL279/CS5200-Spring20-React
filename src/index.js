@@ -5,12 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import Dashboard from "./dashboard/Dashboard";
 
 ReactDOM.render(
-
-  //  <h1>Jobs Database</h1>,
 <Dashboard/>,
-  //  <React.StrictMode>
- //   <App />
- // </React.StrictMode>,
   document.getElementById('root')
 );
 
