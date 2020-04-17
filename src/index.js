@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Jobsdb from "./containers/jobsdb";
+import Dashboard from "./dashboard/Dashboard";
 
 ReactDOM.render(
+
   //  <h1>Jobs Database</h1>,
-<Jobsdb/>,
+<Dashboard/>,
   //  <React.StrictMode>
  //   <App />
  // </React.StrictMode>,

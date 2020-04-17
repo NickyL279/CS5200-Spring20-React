@@ -1,4 +1,4 @@
-const COURSE_API_URL= 'https://radiant-wave-20858.herokuapp.com/api/allUsers';
+const COURSE_API_URL= 'http://localhost:8080/api/allUsers';
 
 export default class UserService {
     findAllUsers = () =>
