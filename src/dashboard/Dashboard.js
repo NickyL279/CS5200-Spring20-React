@@ -1,3 +1,4 @@
+//https://github.com/mui-org/material-ui/tree/master/docs/src/pages/getting-started/templates/dashboard
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
@@ -23,6 +24,7 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import Jobs from "./Jobs";
+
 
 function Copyright() {
   return (
@@ -189,6 +191,7 @@ export default function Dashboard() {
             {/* Recent Orders */}
             <Grid item xs={12}>
               {/*<Paper className={classes.paper}>*/}
+              {/*  <Jobs/>*/}
                 <Jobs/>
               {/*</Paper>*/}
             </Grid>
