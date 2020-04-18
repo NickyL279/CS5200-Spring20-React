@@ -21,7 +21,7 @@
     "recharts": "^1.8.5"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node react-saas-template/server.js",
     "xxxxx": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
