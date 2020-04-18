@@ -1,7 +1,7 @@
 # CS5200 Team 5 
 ## Front End Code Repository
 
-![Front End App](https://master.d3triiqu7oxfi3.amplifyapp.com/ "Front End App")
+![Front End App](https://master.d3triiqu7oxfi3.amplifyapp.com/)
 
 API address: http://cs5200-spring2020-hartenstine.us-east-2.elasticbeanstalk.com/api/
 
