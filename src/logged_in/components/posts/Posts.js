@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from "react";
 import PropTypes from "prop-types";
+import Users from "./Users";
 
 class Posts extends PureComponent {
   state = {
@@ -31,7 +32,7 @@ class Posts extends PureComponent {
     } = this.props;
     return (
       <Fragment>
-
+<Users/>
       </Fragment>
     );
   }
