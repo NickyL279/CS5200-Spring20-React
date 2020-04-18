@@ -19,12 +19,8 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems /*, secondaryListItems*/ } from './listItems';
-import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
+import { mainListItems , secondaryListItems } from './listItems';
 import Jobs from "./Jobs";
-
 
 function Copyright() {
   return (
@@ -148,11 +144,7 @@ export default function Dashboard() {
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Dashboard
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+
         </Toolbar>
       </AppBar>
       <Drawer
@@ -169,8 +161,8 @@ export default function Dashboard() {
         </div>
         <Divider />
         <List>{mainListItems}</List>
-        {/*<Divider />*/}
-        {/*<List>{secondaryListItems}</List>*/}
+        <Divider />
+        <List>{secondaryListItems}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
