@@ -1,7 +1,6 @@
 import React, { PureComponent, Fragment } from "react";
 import PropTypes from "prop-types";
 import RegisterDialog from "./RegisterDialog";
-import TermsOfServiceDialog from "./TermsOfServiceDialog";
 import LoginDialog from "./LoginDialog";
 import ChangePasswordDialog from "./ChangePasswordDialog";
 import ModalBackdrop from "../../../shared/components/ModalBackdrop";
@@ -30,7 +29,6 @@ class DialogSelector extends PureComponent {
     const {
       dialogOpen,
       openTermsDialog,
-      openRegisterDialog,
       openLoginDialog,
       openChangePasswordDialog
     } = this.props;
@@ -45,8 +43,6 @@ class DialogSelector extends PureComponent {
             setStatus={this.setRegisterStatus}
           />
         );
-      case "termsOfService":
-        return <TermsOfServiceDialog onClose={openRegisterDialog} />;
       case "login":
         return (
           <LoginDialog

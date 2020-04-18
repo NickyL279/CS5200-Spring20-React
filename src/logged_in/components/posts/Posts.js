@@ -21,15 +21,7 @@ class Posts extends PureComponent {
   };
 
   render() {
-    const { addPostPaperOpen, addPostModalOpen } = this.state;
-    const {
-      EmojiTextArea,
-      ImageCropper,
-      Dropzone,
-      DateTimePicker,
-      pushMessageToSnackbar,
-      posts
-    } = this.props;
+
     return (
       <Fragment>
 <Users/>

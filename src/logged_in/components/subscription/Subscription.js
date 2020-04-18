@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { List, Divider, Paper, withStyles } from "@material-ui/core";
+import { Paper, withStyles } from "@material-ui/core";
 
 const styles = {
   divider: {
@@ -10,9 +10,6 @@ const styles = {
 
 function Subscription(props) {
   const {
-    transactions,
-    classes,
-    openAddBalanceDialog,
     selectSubscription
   } = props;
 

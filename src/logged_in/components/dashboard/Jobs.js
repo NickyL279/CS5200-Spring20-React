@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom";
 import MUIDataTable from "mui-datatables";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
@@ -44,11 +43,12 @@ import JobService from "../../../shared/services/JobService";
       expandableRowsOnClick: true,
       isRowExpandable: (dataIndex, expandedRows) => {
         // Prevent expand/collapse of any row if there are 4 rows expanded already (but allow those already expanded to be collapsed)
-        if (expandedRows.data.length > 0 && expandedRows.data.filter(d => d.dataIndex === dataIndex).length === 0) return false;
-        return true;
+        return !(expandedRows.data.length > 0 && expandedRows.data.filter(
+            d => d.dataIndex === dataIndex).length === 0);
+
       },
       rowsExpanded: [],
-      renderExpandableRow: (rowData, rowMeta) => {
+      renderExpandableRow: (rowData/*, rowMeta*/) => {
         const colSpan = rowData.length + 1;
         const description = rowData[3].replace("\\n", "\n");//.replace(/\n/g, "<br />");
         return (

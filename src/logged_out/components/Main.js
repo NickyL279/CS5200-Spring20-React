@@ -30,8 +30,6 @@ class Main extends PureComponent {
     cookieRulesDialogOpen: false
   };
 
-  blogPostsMaxUnix = Math.round(new Date().getTime() / 1000);
-
   componentDidMount() {
 
   }
@@ -76,9 +74,9 @@ class Main extends PureComponent {
     this.setState({ mobileDrawerOpen: false });
   };
 
-  switchSelectedTab = tab => {
-    this.setState({ selectedTab: tab });
-  };
+  // switchSelectedTab = tab => {
+  //   this.setState({ selectedTab: tab });
+  // };
 
   openChangePasswordDialog = () => {
     this.setState({ dialogOpen: "changePassword" });

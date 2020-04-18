@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import MUIDataTable from "mui-datatables";
 import CustomToolbarSelect from "./CustomToolbarSelect";
 import UserService from "../../../shared/services/UserService";

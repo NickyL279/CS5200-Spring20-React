@@ -1,15 +1,14 @@
 const COURSE_API_URL= 'http://cs5200-spring2020-hartenstine.us-east-2.elasticbeanstalk.com/api/allUsers';
 
 function jsonToArray(json){
-    var dataArray = [];
+    const dataArray = [];
     if(json.length > 0){
     json.forEach((row) =>
                  {
-        var rowArray = [];
-        var keys = ["id", "firstName", "lastName", "username", "password"];
-        keys.forEach((key) => rowArray.push(row[key]));
+                     const rowArray = [];
+                     const keys = ["id", "firstName", "lastName", "username", "password"];
+                     keys.forEach((key) => rowArray.push(row[key]));
         dataArray.push(rowArray);
-        return
     })
 }
     console.log(dataArray)
@@ -29,7 +28,7 @@ export default class UserService {
                 console.log(response);
                 return jsonToArray(response);
         });
-    createUser = user => {}
-    deleteUser = userId => {}
+    // createUser = user => {}
+    // deleteUser = userId => {}
 
 }
