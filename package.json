@@ -1,27 +1,40 @@
 {
-  "name": "react-jobs",
-  "version": "0.1.0",
-  "private": false,
+  "name": "react-saas-template",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "",
+  "description": "Template for building an SaaS/admin application using React + Material-UI",
   "dependencies": {
-    "@material-ui/core": "^4.9.10",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.2",
-    "express": "^4.17.1",
-    "express-favicon": "^2.0.1",
-    "ka-table": "^3.1.2",
-    "material-table": "^1.57.2",
+    "@date-io/date-fns": "^1.3.13",
+    "@material-ui/core": "^4.9.7",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/pickers": "^3.2.10",
+    "@material-ui/system": "^4.9.6",
+    "@stripe/react-stripe-js": "^1.1.0",
+    "@stripe/stripe-js": "^1.2.0",
+    "aos": "^2.3.4",
+    "classnames": "^2.2.6",
+    "date-fns": "^2.11.1",
+    "emoji-mart": "^3.0.0",
+    "js-cookie": "^2.2.0",
     "mui-datatables": "^2.14.0",
-    "node-sass": "^4.13.1",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-cropper": "^1.3.0",
     "react-dom": "^16.13.1",
-    "react-native": "^0.62.2",
-    "react-scripts": "3.4.1",
+    "react-dropzone": "^10.2.2",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.1",
     "recharts": "^1.8.5"
   },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.3.0",
+    "@testing-library/react": "^10.0.1",
+    "@testing-library/user-event": "^10.0.0"
+  },
   "scripts": {
-    "start": "node react-saas-template/server.js",
+    "start": "node server.js",
     "xxxxx": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -42,12 +55,13 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
-    "@babel/node": "^7.8.7",
-    "@babel/preset-env": "^7.9.5",
-    "@material-ui/icons": "^4.9.1",
-    "babel-preset-react": "^6.24.1"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dunky11/react-saas-template.git"
+  },
+  "author": "dunky11",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dunky11/react-saas-template/issues"
   }
 }
