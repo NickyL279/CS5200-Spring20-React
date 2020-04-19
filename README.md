@@ -9,4 +9,6 @@ Design Wiki: https://github.com/yrrah/cs5200-spring2020-hartenstine/wiki/Design
 
 ![Middle Tier Code Repository](https://github.com/yrrah/cs5200-spring2020-hartenstine "Middle Tier Code Repository")
 
+Project Requirements: https://docs.google.com/document/d/1DYO3wTJGfcVzF9jCS8UMe_yhHxUp5Z0O-ExISwhNNwA/edit
+
 Built using a React SaaS template from https://github.com/dunky11/react-saas-template, licensed under the MIT License - see the [LICENSE.md](https://github.com/dunky11/react-saas-template/blob/master/LICENSE) file for details.
