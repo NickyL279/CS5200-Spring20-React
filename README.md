@@ -3,7 +3,7 @@
 
 Front End App: https://master.d3triiqu7oxfi3.amplifyapp.com/
 
-API address: http://cs5200-spring2020-hartenstine.us-east-2.elasticbeanstalk.com/api/
+API address: https://cs5200-spring2020-hartenstine.com/api/
 
 ![Middle Tier Code Repository](https://github.com/yrrah/cs5200-spring2020-hartenstine "Middle Tier Code Repository")
 
