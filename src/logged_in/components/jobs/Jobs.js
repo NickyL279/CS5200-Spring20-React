@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
-import Jobs from "./Jobs";
+import JobsTable from "./JobsTable";
 
-function Dashboard(props) {
+function Jobs(props) {
   const {
     selectDashboard
   } = props;
@@ -11,12 +11,12 @@ function Dashboard(props) {
 
   return (
     <Fragment>
-      <Jobs/>
+      <JobsTable/>
     </Fragment>
   );
 }
 
-Dashboard.propTypes = {
+Jobs.propTypes = {
   CardChart: PropTypes.elementType,
   statistics: PropTypes.object.isRequired,
   toggleAccountActivation: PropTypes.func,
@@ -26,4 +26,4 @@ Dashboard.propTypes = {
   selectDashboard: PropTypes.func.isRequired
 };
 
-export default Dashboard;
+export default Jobs;

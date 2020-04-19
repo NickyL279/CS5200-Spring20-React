@@ -44,7 +44,7 @@ class Main extends PureComponent {
 
   selectDashboard = () => {
     smoothScrollTop();
-    document.title = "WaVer - Dashboard";
+    document.title = "WaVer - Jobs";
     this.setState({
       selectedTab: "Dashboard"
     });
@@ -58,7 +58,7 @@ class Main extends PureComponent {
 
   selectPosts = () => {
     smoothScrollTop();
-    document.title = "WaVer - Posts";
+    document.title = "WaVer - Users";
     this.setState({
       selectedTab: "Posts"
     });

@@ -73,11 +73,11 @@ import JobService from "../../../shared/services/JobService";
       },
     });
 
-export default function Jobs() {
+export default function JobsTable() {
     return (
         <React.Fragment>
       <MuiThemeProvider theme={theme}>
-        <MUIDataTable title={"Jobs"} data={data} columns={columns} options={options} />
+        <MUIDataTable title={"JobsTable"} data={data} columns={columns} options={options} />
       </MuiThemeProvider>
           </React.Fragment>
     );

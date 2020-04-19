@@ -1,8 +1,8 @@
 import React, { PureComponent, Fragment } from "react";
 import PropTypes from "prop-types";
-import Users from "./Users";
+import UsersTable from "./UsersTable";
 
-class Posts extends PureComponent {
+class Users extends PureComponent {
   state = {
     addPostPaperOpen: false
   };
@@ -24,13 +24,13 @@ class Posts extends PureComponent {
 
     return (
       <Fragment>
-<Users/>
+<UsersTable/>
       </Fragment>
     );
   }
 }
 
-Posts.propTypes = {
+Users.propTypes = {
   EmojiTextArea: PropTypes.elementType,
   ImageCropper: PropTypes.elementType,
   Dropzone: PropTypes.elementType,
@@ -40,4 +40,4 @@ Posts.propTypes = {
   selectPosts: PropTypes.func.isRequired
 };
 
-export default Posts;
+export default Users;

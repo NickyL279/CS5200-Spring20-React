@@ -3,7 +3,7 @@ import MUIDataTable from "mui-datatables";
 import CustomToolbarSelect from "./CustomToolbarSelect";
 import UserService from "../../../shared/services/UserService";
 
-class Users extends React.Component {
+class UsersTable extends React.Component {
 
   constructor() {
     super();
@@ -66,4 +66,4 @@ class Users extends React.Component {
   }
 }
 
-export default Users;
+export default UsersTable;

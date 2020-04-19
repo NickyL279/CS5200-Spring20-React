@@ -2,8 +2,8 @@ import React, { memo } from "react";
 import PropTypes from "prop-types";
 import { Switch } from "react-router-dom";
 import { withStyles } from "@material-ui/core";
-import Dashboard from "./dashboard/Dashboard";
-import Posts from "./posts/Posts";
+import Jobs from "./jobs/Jobs";
+import Users from "./users/Users";
 import Subscription from "./subscription/Subscription";
 import PropsRoute from "../../shared/components/PropsRoute";
 
@@ -70,7 +70,7 @@ function Routing(props) {
       <Switch>
         <PropsRoute
           path="/c/posts"
-          component={Posts}
+          component={Users}
           EmojiTextArea={EmojiTextArea}
           ImageCropper={ImageCropper}
           Dropzone={Dropzone}
@@ -89,7 +89,7 @@ function Routing(props) {
         />
         <PropsRoute
           path=""
-          component={Dashboard}
+          component={Jobs}
           handleNumberChange={handleNumberChange}
           handleSwitchToggle={handleSwitchToggle}
           handleSelectChange={handleSelectChange}
