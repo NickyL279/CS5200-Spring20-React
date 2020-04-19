@@ -1,4 +1,4 @@
-const COURSE_API_URL= 'http://cs5200-spring2020-hartenstine.us-east-2.elasticbeanstalk.com/api/allUsers';
+const COURSE_API_URL= 'https://cs5200-spring2020-hartenstine.com/api/allUsers';
 
 function jsonToArray(json){
     const dataArray = [];
