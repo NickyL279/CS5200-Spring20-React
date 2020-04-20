@@ -1,6 +1,7 @@
 import React, { PureComponent, Fragment } from "react";
 import PropTypes from "prop-types";
 import UsersTable from "./UsersTable";
+import UsersForm from "./UsersForm";
 
 class Users extends PureComponent {
   state = {
@@ -25,6 +26,7 @@ class Users extends PureComponent {
     return (
       <Fragment>
 <UsersTable/>
+<UsersForm/>
       </Fragment>
     );
   }

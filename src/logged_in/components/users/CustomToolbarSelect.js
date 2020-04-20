@@ -5,6 +5,7 @@ import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
 import IndeterminateCheckBoxIcon from "@material-ui/icons/IndeterminateCheckBox";
 import BlockIcon from "@material-ui/icons/Block";
 import { withStyles } from "@material-ui/core/styles";
+import UserService from "../../../shared/services/UserService";
 
 const defaultToolbarSelectStyles = {
     iconButton: {
@@ -36,7 +37,8 @@ class CustomToolbarSelect extends React.Component {
 
     handleClickBlockSelected = () => {
         console.log(`block users with id: ${this.props.selectedRows.data.map(row => this.props.displayData[row.dataIndex].data[0])}`);
-        console.log();
+        (new UserService()).deleteUser(this.props.selectedRows.data.map(row => this.props.displayData[row.dataIndex].data[0]))
+            .then(console.log("Deleted user"))
     };
 
     render() {

@@ -18,6 +18,8 @@
     "emoji-mart": "^3.0.0",
     "express": "^4.17.1",
     "express-favicon": "^2.0.1",
+    "final-form": "^4.19.1",
+    "final-form-material-ui": "^0.3.0",
     "js-cookie": "^2.2.0",
     "mui-datatables": "^2.14.0",
     "prop-types": "^15.7.2",
@@ -25,10 +27,12 @@
     "react-cropper": "^1.3.0",
     "react-dom": "^16.13.1",
     "react-dropzone": "^10.2.2",
+    "react-final-form": "^6.4.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
-    "recharts": "^1.8.5"
+    "recharts": "^1.8.5",
+    "styled-components": "^5.1.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.3.0",
@@ -36,8 +40,8 @@
     "@testing-library/user-event": "^10.0.0"
   },
   "scripts": {
-    "xxxxx": "node server.js",
-    "start": "react-scripts start",
+    "start": "node server.js",
+    "xxxxx": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
