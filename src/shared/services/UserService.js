@@ -1,5 +1,6 @@
 const COURSE_API_URL= 'https://cs5200-spring2020-hartenstine.com/api/';
 // const COURSE_API_URL= 'http://localhost:8080/api/';
+// added this comment
 
 function jsonToArray(json){
     const dataArray = [];
