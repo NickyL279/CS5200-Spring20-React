@@ -1,18 +1,17 @@
 import React, { PureComponent, Fragment } from "react";
 import PropTypes from "prop-types";
+import { withRouter } from "react-router-dom";
+
 import {
-  FormHelperText,
   TextField,
   Button,
-  Checkbox,
-  Typography,
-  FormControlLabel,
   withStyles
 } from "@material-ui/core";
 import FormDialog from "../../../shared/components/FormDialog";
 import HighlightedInformation from "../../../shared/components/HighlightedInformation";
 import ButtonCircularProgress from "../../../shared/components/ButtonCircularProgress";
 import VisibilityPasswordTextField from "../../../shared/components/VisibilityPasswordTextField";
+import UserService from "../../../shared/services/UserService";
 
 const styles = theme => ({
   link: {
@@ -35,24 +34,41 @@ class RegisterDialog extends PureComponent {
   state = {
     loading: false,
     termsOfServiceError: false,
-    passwordIsVisible: false
+    passwordIsVisible: false,
+    userService: new UserService()
   };
 
   register = () => {
-    const { setStatus } = this.props;
-    if (!this.registerTermsCheckbox.checked) {
-      this.setState({ termsOfServiceError: true });
+
+    const { setStatus, history } = this.props;
+
+    if (this.props.status === "accountCreated"){
+      setTimeout(() => {
+        history.push("/c/dashboard");
+      }, 150);
       return;
     }
+
     if (this.registerPassword.value !== this.registerPasswordRepeat.value) {
       setStatus("passwordsDontMatch");
       return;
     }
+
     setStatus(null);
+
     this.setState({ loading: true });
+
     setTimeout(() => {
       this.setState({ loading: false });
     }, 1500);
+
+    const user = {}
+    user.username = this.registerEmail.value
+    user.password = this.registerPassword.value
+
+    console.log(user)
+    this.state.userService.createUser(user).then(setStatus("accountCreated"))
+
   };
 
   onVisibilityChange = isVisible => {
@@ -61,14 +77,11 @@ class RegisterDialog extends PureComponent {
 
   render() {
     const {
-      theme,
       onClose,
-      openTermsDialog,
       setStatus,
-      status,
-      classes
+      status
     } = this.props;
-    const { loading, termsOfServiceError, passwordIsVisible } = this.state;
+    const { loading, passwordIsVisible } = this.state;
     return (
       <FormDialog
         loading={loading}
@@ -88,19 +101,13 @@ class RegisterDialog extends PureComponent {
               margin="normal"
               required
               fullWidth
-              error={status === "invalidEmail"}
-              label="Email Address"
+              label="Username"
               inputRef={node => {
                 this.registerEmail = node;
               }}
               autoFocus
               autoComplete="off"
-              type="email"
-              onChange={() => {
-                if (status === "invalidEmail") {
-                  setStatus(null);
-                }
-              }}
+              type="text"
               FormHelperTextProps={{ error: true }}
             />
             <VisibilityPasswordTextField
@@ -170,65 +177,11 @@ class RegisterDialog extends PureComponent {
               isVisible={passwordIsVisible}
               onVisibilityChange={this.onVisibilityChange}
             />
-            <FormControlLabel
-              style={{ marginRight: 0 }}
-              control={
-                <Checkbox
-                  color="primary"
-                  inputRef={node => {
-                    this.registerTermsCheckbox = node;
-                  }}
-                  onChange={() => {
-                    this.setState({ termsOfServiceError: false });
-                  }}
-                />
-              }
-              label={
-                <Typography variant="body1">
-                  I agree to the
-                  <span
-                    className={classes.link}
-                    onClick={loading ? null : openTermsDialog}
-                    tabIndex={0}
-                    role="button"
-                    onKeyDown={event => {
-                      // For screenreaders listen to space and enter events
-                      if (
-                        (!loading && event.keyCode === 13) ||
-                        event.keyCode === 32
-                      ) {
-                        openTermsDialog();
-                      }
-                    }}
-                  >
-                    {" "}
-                    terms of service
-                  </span>
-                </Typography>
-              }
-            />
-            {termsOfServiceError && (
-              <FormHelperText
-                error
-                style={{
-                  display: "block",
-                  marginTop: theme.spacing(-1)
-                }}
-              >
-                In order to create an account, you have to accept our terms of
-                service.
-              </FormHelperText>
-            )}
-            {status === "accountCreated" ? (
+            {status === "accountCreated" && (
               <HighlightedInformation>
-                We have created your account. Please click on the link in the
-                email we have sent to you before logging in.
+                We have created your account. Please click LOGIN to continue.
               </HighlightedInformation>
-            ) : (
-              <HighlightedInformation>
-                Registration is disabled until we go live.
-              </HighlightedInformation>
-            )}
+             )}
           </Fragment>
         }
         actions={
@@ -240,7 +193,7 @@ class RegisterDialog extends PureComponent {
             color="secondary"
             disabled={loading}
           >
-            Register
+            {status === "accountCreated" ? "Login" : "Register"}
             {loading && <ButtonCircularProgress />}
           </Button>
         }
@@ -255,7 +208,8 @@ RegisterDialog.propTypes = {
   openTermsDialog: PropTypes.func.isRequired,
   status: PropTypes.string,
   setStatus: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles, { withTheme: true })(RegisterDialog);
+export default withRouter(withStyles(styles, { withTheme: true })(RegisterDialog));

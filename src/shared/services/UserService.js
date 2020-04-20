@@ -8,7 +8,7 @@ function jsonToArray(json){
     json.forEach((row) =>
                  {
                      const rowArray = [];
-                     const keys = ["id", "firstName", "lastName", "username", "password"];
+                     const keys = ["id", "dtype", "firstName", "lastName", "username"];
                      keys.forEach((key) => rowArray.push(row[key]));
         dataArray.push(rowArray);
     })

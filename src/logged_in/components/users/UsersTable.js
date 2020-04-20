@@ -26,6 +26,12 @@ class UsersTable extends React.Component {
         }
       },
       {
+        name: "User Type",
+        options: {
+          filter: true,
+        }
+      },
+      {
         name: "First Name",
         options: {
           filter: true,
@@ -42,12 +48,6 @@ class UsersTable extends React.Component {
         options: {
           filter: true,
         }
-      },
-      {
-        name: "Password",
-        options: {
-          filter: false,
-        }
       }
     ];
 
@@ -62,7 +62,7 @@ class UsersTable extends React.Component {
       ),
     };
 
-    return <MUIDataTable title={"ACME Employee list"} data={this.state.users} columns={columns} options={options} />;
+    return <MUIDataTable title={"User list"} data={this.state.users} columns={columns} options={options} />;
   }
 }
 
