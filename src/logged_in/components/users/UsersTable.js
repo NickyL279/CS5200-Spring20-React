@@ -1,7 +1,8 @@
 import React from "react";
 import MUIDataTable from "mui-datatables";
-import CustomToolbarSelect from "./CustomToolbarSelect";
 import UserService from "../../../shared/services/UserService";
+
+
 
 class UsersTable extends React.Component {
 
@@ -14,6 +15,11 @@ class UsersTable extends React.Component {
     this.userService.findAllUsers()
         .then(data => this.setState({users: data }))
         .then(console.log(this.state.users));
+  }
+
+  handleDeleteRow = (rowsDeleted) => {
+    const userIds = rowsDeleted.data.map(row => this.state.users[row.dataIndex][0]);
+    userIds.forEach(id => this.userService.deleteUser(id).then(console.log("Deleted user " + id)))
   }
 
   render() {
@@ -57,9 +63,14 @@ class UsersTable extends React.Component {
       filterType: "dropdown",
       responsive: "stacked",
       rowsPerPage: 10,
-      customToolbarSelect: (selectedRows, displayData, setSelectedRows) => (
-          <CustomToolbarSelect selectedRows={selectedRows} displayData={displayData} setSelectedRows={setSelectedRows} />
-      ),
+      onRowsDelete: this.handleDeleteRow,
+      // serverSide: true,
+      // onTableChange: (action, tableState) => {
+      //   this.xhrRequest('my.api.com/tableData', result => {
+      //     this.setState({ data: result });
+      //   });
+      // }
+      //https://github.com/gregnb/mui-datatables/blob/master/examples/serverside-pagination/index.js
     };
 
     return <MUIDataTable title={"User list"} data={this.state.users} columns={columns} options={options} />;

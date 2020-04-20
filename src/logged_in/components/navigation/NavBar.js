@@ -206,24 +206,24 @@ function NavBar(props) {
                 </IconButton>
               </Box>
             </Hidden>
-            <Hidden xsDown>
-              <Typography
-                variant="h4"
-                className={classes.brandText}
-                display="inline"
-                color="primary"
-              >
-                Wa
-              </Typography>
-              <Typography
-                variant="h4"
-                className={classes.brandText}
-                display="inline"
-                color="secondary"
-              >
-                Ver
-              </Typography>
-            </Hidden>
+            {/*<Hidden xsDown>*/}
+            {/*  <Typography*/}
+            {/*    variant="h4"*/}
+            {/*    className={classes.brandText}*/}
+            {/*    display="inline"*/}
+            {/*    color="primary"*/}
+            {/*  >*/}
+            {/*    Wa*/}
+            {/*  </Typography>*/}
+            {/*  <Typography*/}
+            {/*    variant="h4"*/}
+            {/*    className={classes.brandText}*/}
+            {/*    display="inline"*/}
+            {/*    color="secondary"*/}
+            {/*  >*/}
+            {/*    Ver*/}
+            {/*  </Typography>*/}
+            {/*</Hidden>*/}
           </Box>
           <Box
             display="flex"

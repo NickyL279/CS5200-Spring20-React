@@ -37,15 +37,15 @@ class Main extends PureComponent {
   selectHome = () => {
     smoothScrollTop();
     document.title =
-      "WaVer - Free template for building an SaaS or admin application";
+      "CS5200 Team 5 Project";
     this.setState({ selectedTab: "Home" });
   };
 
-  selectBlog = () => {
-    smoothScrollTop();
-    document.title = "WaVer - Blog";
-    this.setState({ selectedTab: "Blog" });
-  };
+  // selectBlog = () => {
+  //   smoothScrollTop();
+  //   document.title = "WaVer - Blog";
+  //   this.setState({ selectedTab: "Blog" });
+  // };
 
   openLoginDialog = () => {
     this.setState({ dialogOpen: "login", mobileDrawerOpen: false });
@@ -62,17 +62,17 @@ class Main extends PureComponent {
     });
   };
 
-  openTermsDialog = () => {
-    this.setState({ dialogOpen: "termsOfService" });
-  };
+  // openTermsDialog = () => {
+  //   this.setState({ dialogOpen: "termsOfService" });
+  // };
 
-  handleMobileDrawerOpen = () => {
-    this.setState({ mobileDrawerOpen: true });
-  };
-
-  handleMobileDrawerClose = () => {
-    this.setState({ mobileDrawerOpen: false });
-  };
+  // handleMobileDrawerOpen = () => {
+  //   this.setState({ mobileDrawerOpen: true });
+  // };
+  //
+  // handleMobileDrawerClose = () => {
+  //   this.setState({ mobileDrawerOpen: false });
+  // };
 
   // switchSelectedTab = tab => {
   //   this.setState({ selectedTab: tab });
@@ -94,8 +94,8 @@ class Main extends PureComponent {
     const { classes } = this.props;
     const {
       selectedTab,
-      mobileDrawerOpen,
-      blogPosts,
+      // mobileDrawerOpen,
+      // blogPosts,
       dialogOpen,
       cookieRulesDialogOpen
     } = this.state;
@@ -123,14 +123,14 @@ class Main extends PureComponent {
           selectTab={this.selectTab}
           openLoginDialog={this.openLoginDialog}
           openRegisterDialog={this.openRegisterDialog}
-          mobileDrawerOpen={mobileDrawerOpen}
+          // mobileDrawerOpen={mobileDrawerOpen}
           handleMobileDrawerOpen={this.handleMobileDrawerOpen}
           handleMobileDrawerClose={this.handleMobileDrawerClose}
         />
         <Routing
-          blogPosts={blogPosts}
+          // blogPosts={blogPosts}
           selectHome={this.selectHome}
-          selectBlog={this.selectBlog}
+          // selectBlog={this.selectBlog}
         />
         <Footer />
       </div>

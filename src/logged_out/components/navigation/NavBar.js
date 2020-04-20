@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
-  Typography,
+  // Typography,
   Button,
   Hidden,
   IconButton,
@@ -71,22 +71,22 @@ function NavBar(props) {
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <div>
-            <Typography
-              variant="h4"
-              className={classes.brandText}
-              display="inline"
-              color="primary"
-            >
-              Wa
-            </Typography>
-            <Typography
-              variant="h4"
-              className={classes.brandText}
-              display="inline"
-              color="secondary"
-            >
-              Ver
-            </Typography>
+            {/*<Typography*/}
+            {/*  variant="h4"*/}
+            {/*  className={classes.brandText}*/}
+            {/*  display="inline"*/}
+            {/*  color="primary"*/}
+            {/*>*/}
+            {/*  Wa*/}
+            {/*</Typography>*/}
+            {/*<Typography*/}
+            {/*  variant="h4"*/}
+            {/*  className={classes.brandText}*/}
+            {/*  display="inline"*/}
+            {/*  color="secondary"*/}
+            {/*>*/}
+            {/*  Ver*/}
+            {/*</Typography>*/}
           </div>
           <div>
             <Hidden mdUp>

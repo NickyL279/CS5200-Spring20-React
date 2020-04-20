@@ -41,6 +41,13 @@ import JobService from "../../../shared/services/JobService";
       responsive: 'scrollMaxHeight',
       expandableRows: true,
       expandableRowsOnClick: true,
+      // serverSide: true,
+      // onTableChange: (action, tableState) => {
+      //   this.xhrRequest('my.api.com/tableData', result => {
+      //     this.setState({ data: result });
+      //   });
+      // }
+      //https://github.com/gregnb/mui-datatables/blob/master/examples/serverside-pagination/index.js
       isRowExpandable: (dataIndex, expandedRows) => {
         // Prevent expand/collapse of any row if there are 4 rows expanded already (but allow those already expanded to be collapsed)
         return !(expandedRows.data.length > 0 && expandedRows.data.filter(
