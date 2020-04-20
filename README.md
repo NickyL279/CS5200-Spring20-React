@@ -7,6 +7,8 @@ API address: https://cs5200-spring2020-hartenstine.com/api/
 
 Design Wiki: https://github.com/yrrah/cs5200-spring2020-hartenstine/wiki/Design
 
+Test Wiki: https://github.com/yrrah/cs5200-spring2020-hartenstine/wiki/Test
+
 ![Middle Tier Code Repository](https://github.com/yrrah/cs5200-spring2020-hartenstine "Middle Tier Code Repository")
 
 Project Requirements: https://docs.google.com/document/d/1DYO3wTJGfcVzF9jCS8UMe_yhHxUp5Z0O-ExISwhNNwA/edit
