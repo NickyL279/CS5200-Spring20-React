@@ -124,9 +124,26 @@ const styles = theme => ({
 });
 
 function NavBar(props) {
-  const { selectedTab, classes, width, loggedInUser } = props;
+  const { selectedTab, classes, width, loggedInUser /*, setLoggedInUser*/ } = props;
   // Will be use to make website more accessible by screen readers
   const links = useRef([]);
+
+  const adminItem =     {
+    link: "/c/posts",
+    name: "Manage Users",
+    onClick: console.log("Posts clicked"),
+    icon: {
+      desktop: (
+          <ImageIcon
+              className={
+                selectedTab === "Posts" ? classes.textPrimary : "text-white"
+              }
+              fontSize="small"
+          />
+      ),
+      mobile: <ImageIcon className="text-white" />
+    }
+  }
 
   const menuItems = [
     {
@@ -146,24 +163,8 @@ function NavBar(props) {
       }
     },
     {
-      link: "/c/posts",
-      name: "Posts",
-      onClick: console.log("Posts clicked"),
-      icon: {
-        desktop: (
-          <ImageIcon
-            className={
-              selectedTab === "Posts" ? classes.textPrimary : "text-white"
-            }
-            fontSize="small"
-          />
-        ),
-        mobile: <ImageIcon className="text-white" />
-      }
-    },
-    {
       link: "/c/subscription",
-      name: "Subscription",
+      name: "My Profile",
       onClick: console.log("Subscription clicked"),
       icon: {
         desktop: (
@@ -178,20 +179,30 @@ function NavBar(props) {
         ),
         mobile: <AccountBalanceIcon className="text-white" />
       }
-    },
-    {
-      link: "/",
-      name: "Logout",
-      icon: {
-        desktop: (
-          <PowerSettingsNewIcon className="text-white" fontSize="small" />
-        ),
-        mobile: <PowerSettingsNewIcon className="text-white" />
-      }
     }
   ];
 
+  if(loggedInUser.dtype === "Admin")
+  {
+    menuItems.push(adminItem)
+  }
+
+  menuItems.push(
+      {
+        link: "/",
+        name: "Logout",
+        onClick: console.log("Logout clicked"),
+        icon: {
+          desktop: (
+              <PowerSettingsNewIcon className="text-white" fontSize="small" />
+          ),
+          mobile: <PowerSettingsNewIcon className="text-white" />
+        }
+      }
+  )
+
   return (
+
     <Fragment>
       <AppBar position="sticky" className={classes.appBar}>
         <Toolbar className={classes.appBarToolbar}>
@@ -322,7 +333,8 @@ NavBar.propTypes = {
   selectedTab: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
-  loggedInUser: PropTypes.object.isRequired
+  loggedInUser: PropTypes.object.isRequired,
+  setLoggedInUser: PropTypes.func.isRequired
 };
 
 export default withWidth()(withStyles(styles, { withTheme: true })(NavBar));
