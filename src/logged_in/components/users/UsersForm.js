@@ -14,8 +14,7 @@ import UserService from "../../../shared/services/UserService";
 class UsersForm extends React.Component {
 
     onSubmit = values => {
-        (new UserService()).createUser(values)
-        this.props.datacall()
+        (new UserService()).createUser(values).then(()=>this.props.datacall())
     };
 
     render() {

@@ -12,14 +12,14 @@ const styles = {
 
 function Profile(props) {
   const {
-    selectSubscription, loggedInUser
+    selectSubscription, loggedInUser, setLoggedInUser
   } = props;
 
   useEffect(selectSubscription, [selectSubscription]);
 
   return (
     <Paper>
-<ProfileForm user = {loggedInUser}/>
+<ProfileForm user = {loggedInUser} setLoggedInUser = {setLoggedInUser}/>
     </Paper>
   );
 }
@@ -27,7 +27,8 @@ function Profile(props) {
 Profile.propTypes = {
   classes: PropTypes.object.isRequired,
   selectSubscription: PropTypes.func.isRequired,
-  loggedInUser: PropTypes.object.isRequired
+  loggedInUser: PropTypes.object.isRequired,
+  setLoggedInUser: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(Profile);

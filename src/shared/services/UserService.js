@@ -1,5 +1,5 @@
-const COURSE_API_URL= 'https://cs5200-spring2020-hartenstine.com/api/';
-// const COURSE_API_URL= 'http://localhost:8080/api/';
+// const COURSE_API_URL= 'https://cs5200-spring2020-hartenstine.com/api/';
+const COURSE_API_URL= 'http://localhost:8080/api/';
 // added this comment
 
 function jsonToArray(json){
@@ -18,17 +18,7 @@ function jsonToArray(json){
 }
 
 export default class UserService {
-    findAllUsers = () =>
-        fetch(COURSE_API_URL + "allUsers", {
-            crossDomain:true,
-            method: 'GET',
-            headers: {'Content-Type':'application/json; charset=utf-8'}
-        })
-            .then(response => response.json())
-            .then(response => {
-                console.log(response);
-                return jsonToArray(response);
-        });
+
     createUser = function(user){
 
         let userUrl;
@@ -64,6 +54,29 @@ export default class UserService {
              console.log(response);
          });
     };
+
+    findAllUsers = () =>
+        fetch(COURSE_API_URL + "allUsers", {
+            crossDomain:true,
+            method: 'GET',
+            headers: {'Content-Type':'application/json; charset=utf-8'}
+        })
+            .then(response => response.json())
+            .then(response => {
+                console.log(response);
+                return jsonToArray(response);
+            });
+
+    updateUser = (userId, user) =>
+        fetch(COURSE_API_URL + "users/" + userId, {
+            method: 'PUT',
+            body: JSON.stringify(user),
+            headers: {'Content-Type':'application/json; charset=utf-8'}
+        }).then(response => {
+            console.log(userId)
+            console.log(user)
+            console.log(response);
+        });
 
     deleteUser = userId =>
         fetch(COURSE_API_URL + "users/" + userId, {

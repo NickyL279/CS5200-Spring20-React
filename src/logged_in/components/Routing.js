@@ -65,7 +65,8 @@ function Routing(props) {
     selectPosts,
     selectSubscription,
     // openAddBalanceDialog
-    loggedInUser
+    loggedInUser,
+    setLoggedInUser
   } = props;
   return (
     <div className={classes.wrapper}>
@@ -89,6 +90,7 @@ function Routing(props) {
           selectSubscription={selectSubscription}
           // openAddBalanceDialog={openAddBalanceDialog}
           loggedInUser={loggedInUser}
+          setLoggedInUser={setLoggedInUser}
         />
         <PropsRoute
           path=""
@@ -129,7 +131,8 @@ Routing.propTypes = {
   selectDashboard: PropTypes.func.isRequired,
   selectPosts: PropTypes.func.isRequired,
   selectSubscription: PropTypes.func.isRequired,
-  loggedInUser: PropTypes.object.isRequired
+  loggedInUser: PropTypes.object.isRequired,
+  setLoggedInUser: PropTypes.func.isRequired
   // openAddBalanceDialog: PropTypes.func.isRequired
 };
 

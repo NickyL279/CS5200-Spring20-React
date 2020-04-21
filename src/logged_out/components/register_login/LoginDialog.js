@@ -12,7 +12,7 @@ import {
   withStyles
 } from "@material-ui/core";
 import FormDialog from "../../../shared/components/FormDialog";
-import HighlightedInformation from "../../../shared/components/HighlightedInformation";
+// import HighlightedInformation from "../../../shared/components/HighlightedInformation";
 import ButtonCircularProgress from "../../../shared/components/ButtonCircularProgress";
 import VisibilityPasswordTextField from "../../../shared/components/VisibilityPasswordTextField";
 
@@ -162,18 +162,18 @@ class LoginDialog extends PureComponent {
               {/*  }*/}
               {/*  label={<Typography variant="body1">Remember me</Typography>}*/}
               {/*/>*/}
-              {status === "verificationEmailSend" ? (
-                <HighlightedInformation>
-                  We have send instructions on how to reset your password to
-                  your email address
-                </HighlightedInformation>
-              ) : (
-                <HighlightedInformation>
-                  Username is: <b>test</b>
-                  <br />
-                  Password is: <b>test</b>
-                </HighlightedInformation>
-              )}
+              {/*{status === "verificationEmailSend" ? (*/}
+              {/*  <HighlightedInformation>*/}
+              {/*    We have send instructions on how to reset your password to*/}
+              {/*    your email address*/}
+              {/*  </HighlightedInformation>*/}
+              {/*) : (*/}
+              {/*  <HighlightedInformation>*/}
+              {/*    Username is: <b>test</b>*/}
+              {/*    <br />*/}
+              {/*    Password is: <b>test</b>*/}
+              {/*  </HighlightedInformation>*/}
+              {/*)}*/}
             </Fragment>
           }
           actions={

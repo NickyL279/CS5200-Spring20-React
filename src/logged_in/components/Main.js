@@ -145,7 +145,7 @@ class Main extends PureComponent {
             selectPosts={this.selectPosts}
             selectSubscription={this.selectSubscription}
             loggedInUser={loggedInUser}
-            // openAddBalanceDialog={this.openAddBalanceDialog}
+            setLoggedInUser={setLoggedInUser}
           />
         </main>
       </Fragment>
