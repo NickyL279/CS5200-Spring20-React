@@ -97,7 +97,9 @@ class Main extends PureComponent {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes,
+      setLoggedInUser,
+      loggedInUser} = this.props;
     const {
       selectedTab,
       ImageCropper,
@@ -118,6 +120,8 @@ class Main extends PureComponent {
           selectedTab={selectedTab}
           messages={messages}
           openAddBalanceDialog={this.openAddBalanceDialog}
+          loggedInUser={loggedInUser}
+          setLoggedInUser={setLoggedInUser}
         />
 
         <main className={classNames(classes.main)}>
@@ -140,7 +144,8 @@ class Main extends PureComponent {
             selectDashboard={this.selectDashboard}
             selectPosts={this.selectPosts}
             selectSubscription={this.selectSubscription}
-            openAddBalanceDialog={this.openAddBalanceDialog}
+            loggedInUser={loggedInUser}
+            // openAddBalanceDialog={this.openAddBalanceDialog}
           />
         </main>
       </Fragment>
@@ -149,7 +154,9 @@ class Main extends PureComponent {
 }
 
 Main.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  setLoggedInUser: PropTypes.func.isRequired,
+  loggedInUser: PropTypes.object
 };
 
 export default withStyles(styles, { withTheme: true })(Main);

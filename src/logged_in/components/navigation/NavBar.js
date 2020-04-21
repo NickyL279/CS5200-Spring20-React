@@ -25,7 +25,7 @@ import ImageIcon from "@material-ui/icons/Image";
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import MenuIcon from "@material-ui/icons/Menu";
-import NavigationDrawer from "../../../shared/components/NavigationDrawer";
+// import NavigationDrawer from "../../../shared/components/NavigationDrawer";
 import profilePicture from "../../dummy_data/images/profilePicture.jpg";
 
 const styles = theme => ({
@@ -124,7 +124,7 @@ const styles = theme => ({
 });
 
 function NavBar(props) {
-  const { selectedTab, classes, width } = props;
+  const { selectedTab, classes, width, loggedInUser } = props;
   // Will be use to make website more accessible by screen readers
   const links = useRef([]);
 
@@ -132,7 +132,7 @@ function NavBar(props) {
     {
       link: "/c/dashboard",
       name: "Dashboard",
-      onClick: "",
+      onClick: console.log("Dashboard clicked"),
       icon: {
         desktop: (
           <DashboardIcon
@@ -148,7 +148,7 @@ function NavBar(props) {
     {
       link: "/c/posts",
       name: "Posts",
-      onClick: "",
+      onClick: console.log("Posts clicked"),
       icon: {
         desktop: (
           <ImageIcon
@@ -164,7 +164,7 @@ function NavBar(props) {
     {
       link: "/c/subscription",
       name: "Subscription",
-      onClick: "",
+      onClick: console.log("Subscription clicked"),
       icon: {
         desktop: (
           <AccountBalanceIcon
@@ -190,6 +190,7 @@ function NavBar(props) {
       }
     }
   ];
+
   return (
     <Fragment>
       <AppBar position="sticky" className={classes.appBar}>
@@ -199,7 +200,7 @@ function NavBar(props) {
               <Box mr={1}>
                 <IconButton
                   aria-label="Open Navigation"
-                  onClick={""}
+                  onClick={console.log("Open Navigation clicked")}
                   color="primary"
                 >
                   <MenuIcon />
@@ -245,7 +246,7 @@ function NavBar(props) {
                 <ListItemText
                   className={classes.username}
                   primary={
-                    <Typography color="textPrimary">Username</Typography>
+                    <Typography color="textPrimary">{loggedInUser.username} ( {loggedInUser.dtype} )</Typography>
                   }
                 />
               )}
@@ -301,28 +302,27 @@ function NavBar(props) {
           </List>
         </Drawer>
       </Hidden>
-      <NavigationDrawer
-        menuItems={menuItems.map(element => ({
-          link: element.link,
-          name: element.name,
-          icon: element.icon.mobile,
-          onClick: element.onClick
-        }))}
-        anchor="left"
-        open={""}
-        selectedItem={selectedTab}
-        onClose={""}
-      />
+      {/*<NavigationDrawer*/}
+      {/*  menuItems={menuItems.map(element => ({*/}
+      {/*    link: element.link,*/}
+      {/*    name: element.name,*/}
+      {/*    icon: element.icon.mobile,*/}
+      {/*    onClick: element.onClick*/}
+      {/*  }))}*/}
+      {/*  anchor="left"*/}
+      {/*  open={console.log("NavigationDrawer open")}*/}
+      {/*  selectedItem={selectedTab}*/}
+      {/*  onClose={console.log("NavigationDrawer closed")}*/}
+      {/*/>*/}
     </Fragment>
   );
 }
 
 NavBar.propTypes = {
-  messages: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectedTab: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
-  openAddBalanceDialog: PropTypes.func.isRequired
+  loggedInUser: PropTypes.object.isRequired
 };
 
 export default withWidth()(withStyles(styles, { withTheme: true })(NavBar));

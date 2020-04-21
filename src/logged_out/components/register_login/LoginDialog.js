@@ -1,13 +1,14 @@
 import React, { PureComponent, Fragment } from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
+// import classNames from "classnames";
 import { withRouter } from "react-router-dom";
+import UserService from "../../../shared/services/UserService";
 import {
   TextField,
   Button,
-  Checkbox,
-  Typography,
-  FormControlLabel,
+  // Checkbox,
+  // Typography,
+  // FormControlLabel,
   withStyles
 } from "@material-ui/core";
 import FormDialog from "../../../shared/components/FormDialog";
@@ -37,7 +38,11 @@ const styles = theme => ({
 });
 
 class LoginDialog extends PureComponent {
-  state = { loading: false, passwordIsVisible: false };
+  state = {
+    loading: false,
+    passwordIsVisible: false,
+    userService: new UserService()
+  };
 
   onVisibilityChange = isVisible => {
     this.setState({ passwordIsVisible: isVisible });
@@ -49,32 +54,31 @@ class LoginDialog extends PureComponent {
       loading: true
     });
     setStatus(null);
-    if (this.loginEmail.value !== "test@web.com") {
-      setTimeout(() => {
-        setStatus("invalidEmail");
-        this.setState({
-          loading: false
-        });
-      }, 1500);
-    } else if (this.loginPassword.value !== "test") {
-      setTimeout(() => {
-        setStatus("invalidPassword");
-        this.setState({
-          loading: false
-        });
-      }, 1500);
-    } else {
-      setTimeout(() => {
-        history.push("/c/dashboard");
-      }, 150);
-    }
-  };
+
+    this.state.userService.authenticateUser(this.loginEmail.value,
+                                            this.loginPassword.value)
+        .then((result) => {
+            if (result === "fail") {
+              setTimeout(() => {
+                setStatus("invalidPassword");
+                this.setState({
+                  loading: false
+                });
+              }, 1500);
+            } else {
+              setTimeout(() => {
+                this.props.setLoggedInUser(result);
+                history.push("/c/dashboard");
+              }, 150);
+            }
+          });
+  }
 
   render() {
     const {
-      classes,
+      // classes,
       onClose,
-      openChangePasswordDialog,
+      // openChangePasswordDialog,
       status,
       setStatus
     } = this.props;
@@ -99,13 +103,13 @@ class LoginDialog extends PureComponent {
                 error={status === "invalidEmail"}
                 required
                 fullWidth
-                label="Email Address"
+                label="Username"
                 inputRef={node => {
                   this.loginEmail = node;
                 }}
                 autoFocus
                 autoComplete="off"
-                type="email"
+                type="text"
                 onChange={() => {
                   if (status === "invalidEmail") {
                     setStatus(null);
@@ -136,8 +140,7 @@ class LoginDialog extends PureComponent {
                 helperText={
                   status === "invalidPassword" ? (
                     <span>
-                      Incorrect password. Try again, or click on{" "}
-                      <b>&quot;Forgot Password?&quot;</b> to reset it.
+                      Incorrect username / password.
                     </span>
                   ) : (
                     ""
@@ -147,18 +150,18 @@ class LoginDialog extends PureComponent {
                 onVisibilityChange={this.onVisibilityChange}
                 isVisible={passwordIsVisible}
               />
-              <FormControlLabel
-                className={classes.formControlLabel}
-                control={
-                  <Checkbox
-                    inputRef={node => {
-                      this.loginRememberMe = node;
-                    }}
-                    color="primary"
-                  />
-                }
-                label={<Typography variant="body1">Remember me</Typography>}
-              />
+              {/*<FormControlLabel*/}
+              {/*  className={classes.formControlLabel}*/}
+              {/*  control={*/}
+              {/*    <Checkbox*/}
+              {/*      inputRef={node => {*/}
+              {/*        this.loginRememberMe = node;*/}
+              {/*      }}*/}
+              {/*      color="primary"*/}
+              {/*    />*/}
+              {/*  }*/}
+              {/*  label={<Typography variant="body1">Remember me</Typography>}*/}
+              {/*/>*/}
               {status === "verificationEmailSend" ? (
                 <HighlightedInformation>
                   We have send instructions on how to reset your password to
@@ -166,7 +169,7 @@ class LoginDialog extends PureComponent {
                 </HighlightedInformation>
               ) : (
                 <HighlightedInformation>
-                  Email is: <b>test@web.com</b>
+                  Username is: <b>test</b>
                   <br />
                   Password is: <b>test</b>
                 </HighlightedInformation>
@@ -186,28 +189,28 @@ class LoginDialog extends PureComponent {
                 Login
                 {loading && <ButtonCircularProgress />}
               </Button>
-              <Typography
-                align="center"
-                className={classNames(
-                  classes.forgotPassword,
-                  loading ? classes.disabledText : null
-                )}
-                color="primary"
-                onClick={loading ? null : openChangePasswordDialog}
-                tabIndex={0}
-                role="button"
-                onKeyDown={event => {
-                  // For screenreaders listen to space and enter events
-                  if (
-                    (!loading && event.keyCode === 13) ||
-                    event.keyCode === 32
-                  ) {
-                    openChangePasswordDialog();
-                  }
-                }}
-              >
-                Forgot Password?
-              </Typography>
+              {/*<Typography*/}
+              {/*  align="center"*/}
+              {/*  className={classNames(*/}
+              {/*    classes.forgotPassword,*/}
+              {/*    loading ? classes.disabledText : null*/}
+              {/*  )}*/}
+              {/*  color="primary"*/}
+              {/*  onClick={loading ? null : openChangePasswordDialog}*/}
+              {/*  tabIndex={0}*/}
+              {/*  role="button"*/}
+              {/*  onKeyDown={event => {*/}
+              {/*    // For screenreaders listen to space and enter events*/}
+              {/*    if (*/}
+              {/*      (!loading && event.keyCode === 13) ||*/}
+              {/*      event.keyCode === 32*/}
+              {/*    ) {*/}
+              {/*      openChangePasswordDialog();*/}
+              {/*    }*/}
+              {/*  }}*/}
+              {/*>*/}
+              {/*  Forgot Password?*/}
+              {/*</Typography>*/}
             </Fragment>
           }
         />
@@ -222,7 +225,8 @@ LoginDialog.propTypes = {
   setStatus: PropTypes.func.isRequired,
   openChangePasswordDialog: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  status: PropTypes.string
+  status: PropTypes.string,
+  setLoggedInUser: PropTypes.func.isRequired
 };
 
 export default withRouter(withStyles(styles)(LoginDialog));

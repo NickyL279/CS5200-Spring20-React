@@ -30,7 +30,8 @@ class DialogSelector extends PureComponent {
       dialogOpen,
       openTermsDialog,
       openLoginDialog,
-      openChangePasswordDialog
+      openChangePasswordDialog,
+      setLoggedInUser
     } = this.props;
     const { loginStatus, registerStatus } = this.state;
     switch (dialogOpen) {
@@ -50,6 +51,7 @@ class DialogSelector extends PureComponent {
             status={loginStatus}
             setStatus={this.setLoginStatus}
             openChangePasswordDialog={openChangePasswordDialog}
+            setLoggedInUser={setLoggedInUser}
           />
         );
       case "changePassword":
@@ -80,7 +82,8 @@ DialogSelector.propTypes = {
   onClose: PropTypes.func.isRequired,
   openTermsDialog: PropTypes.func.isRequired,
   openRegisterDialog: PropTypes.func.isRequired,
-  openChangePasswordDialog: PropTypes.func.isRequired
+  openChangePasswordDialog: PropTypes.func.isRequired,
+  setLoggedInUser: PropTypes.func.isRequired
 };
 
 export default DialogSelector;

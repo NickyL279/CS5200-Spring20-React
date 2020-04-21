@@ -40,8 +40,8 @@
     "@testing-library/user-event": "^10.0.0"
   },
   "scripts": {
-    "start": "node server.js",
-    "xxxxx": "react-scripts start",
+    "xxxxx": "node server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -1,25 +1,31 @@
 import React from "react";
+import PropTypes from "prop-types";
 import MUIDataTable from "mui-datatables";
 import UserService from "../../../shared/services/UserService";
 
 
 
+
 class UsersTable extends React.Component {
 
-  constructor() {
-    super();
-    this.userService = new UserService();
-    this.state = {users: []};
-  }
+  state = {
+    data: []
+  };
+
   componentDidMount() {
-    this.userService.findAllUsers()
-        .then(data => this.setState({users: data }))
-        .then(console.log(this.state.users));
+    this.setState({data: this.props.data});
+    console.log("UsersTable didmount")
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.data !== this.props.data) {
+      this.setState({ data: this.props.data });
+    }
   }
 
   handleDeleteRow = (rowsDeleted) => {
-    const userIds = rowsDeleted.data.map(row => this.state.users[row.dataIndex][0]);
-    userIds.forEach(id => this.userService.deleteUser(id).then(console.log("Deleted user " + id)))
+    const userIds = rowsDeleted.data.map(row => this.state.data[row.dataIndex][0]);
+    userIds.forEach(id => (new UserService()).deleteUser(id).then(console.log("Deleted user " + id)))
   }
 
   render() {
@@ -64,17 +70,23 @@ class UsersTable extends React.Component {
       responsive: "stacked",
       rowsPerPage: 10,
       onRowsDelete: this.handleDeleteRow,
-      // serverSide: true,
-      // onTableChange: (action, tableState) => {
-      //   this.xhrRequest('my.api.com/tableData', result => {
-      //     this.setState({ data: result });
-      //   });
-      // }
+      serverSide: true,
+      onTableChange: (action, tableState) => {
+        console.log(action)
+        console.log(tableState)
+        // this.xhrRequest('my.api.com/tableData', result => {
+        //   this.setState({ data: result });
+        // });
+      }
       //https://github.com/gregnb/mui-datatables/blob/master/examples/serverside-pagination/index.js
     };
 
-    return <MUIDataTable title={"User list"} data={this.state.users} columns={columns} options={options} />;
+    return <MUIDataTable title={"User list"} data={this.state.data} columns={columns} options={options} />;
   }
+}
+
+UsersTable.propTypes = {
+  data: PropTypes.array.isRequired
 }
 
 export default UsersTable;

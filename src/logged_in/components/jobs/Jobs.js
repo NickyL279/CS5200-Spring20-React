@@ -17,12 +17,6 @@ function Jobs(props) {
 }
 
 Jobs.propTypes = {
-  CardChart: PropTypes.elementType,
-  statistics: PropTypes.object.isRequired,
-  toggleAccountActivation: PropTypes.func,
-  pushMessageToSnackbar: PropTypes.func,
-  targets: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isAccountActivated: PropTypes.bool.isRequired,
   selectDashboard: PropTypes.func.isRequired
 };
 

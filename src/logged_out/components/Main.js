@@ -24,8 +24,8 @@ const styles = theme => ({
 class Main extends PureComponent {
   state = {
     selectedTab: null,
-    mobileDrawerOpen: false,
-    blogPosts: [],
+    // mobileDrawerOpen: false,
+    // blogPosts: [],
     dialogOpen: null,
     cookieRulesDialogOpen: false
   };
@@ -62,9 +62,9 @@ class Main extends PureComponent {
     });
   };
 
-  // openTermsDialog = () => {
-  //   this.setState({ dialogOpen: "termsOfService" });
-  // };
+  openTermsDialog = () => {
+    this.setState({ dialogOpen: "termsOfService" });
+  };
 
   // handleMobileDrawerOpen = () => {
   //   this.setState({ mobileDrawerOpen: true });
@@ -91,7 +91,9 @@ class Main extends PureComponent {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes,
+      setLoggedInUser,
+      loggedInUser} = this.props;
     const {
       selectedTab,
       // mobileDrawerOpen,
@@ -113,6 +115,7 @@ class Main extends PureComponent {
           openTermsDialog={this.openTermsDialog}
           openRegisterDialog={this.openRegisterDialog}
           openChangePasswordDialog={this.openChangePasswordDialog}
+          setLoggedInUser={setLoggedInUser}
         />
         <CookieRulesDialog
           open={cookieRulesDialogOpen}
@@ -124,8 +127,10 @@ class Main extends PureComponent {
           openLoginDialog={this.openLoginDialog}
           openRegisterDialog={this.openRegisterDialog}
           // mobileDrawerOpen={mobileDrawerOpen}
-          handleMobileDrawerOpen={this.handleMobileDrawerOpen}
-          handleMobileDrawerClose={this.handleMobileDrawerClose}
+          // handleMobileDrawerOpen={this.handleMobileDrawerOpen}
+          // handleMobileDrawerClose={this.handleMobileDrawerClose}
+          loggedInUser={loggedInUser}
+          setLoggedInUser={setLoggedInUser}
         />
         <Routing
           // blogPosts={blogPosts}
@@ -139,7 +144,9 @@ class Main extends PureComponent {
 }
 
 Main.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  setLoggedInUser: PropTypes.func.isRequired,
+  loggedInUser: PropTypes.object
 };
 
 export default withStyles(styles, { withTheme: true })(Main);

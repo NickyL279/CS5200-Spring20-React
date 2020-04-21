@@ -10,26 +10,49 @@ const LoggedInComponent = lazy(() => import("./logged_in/components/Main"));
 
 const LoggedOutComponent = lazy(() => import("./logged_out/components/Main"));
 
-function App() {
-  return (
-    <BrowserRouter>
-      <MuiThemeProvider theme={theme}>
-        <CssBaseline />
-        <GlobalStyles />
-        <Pace color={theme.palette.primary.light} />
-        <Suspense fallback={<Fragment />}>
-          <Switch>
-            <Route path="/c">
-              <LoggedInComponent />
-            </Route>
-            <Route>
-              <LoggedOutComponent />
-            </Route>
-          </Switch>
-        </Suspense>
-      </MuiThemeProvider>
-    </BrowserRouter>
-  );
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    // this.state = {loggedInUser: {username: 'testuser', dtype: 'Admin', firstName: "test", lastName: "user"}};
+    this.state = {loggedInUser: null};
+  }
+
+  setLoggedInUser = loggedInUser => {
+    this.setState({ loggedInUser });
+  };
+
+  render() {
+    return (
+        <BrowserRouter>
+          <MuiThemeProvider theme={theme}>
+            <CssBaseline/>
+            <GlobalStyles/>
+            <Pace color={theme.palette.primary.light}/>
+            <Suspense fallback={<Fragment/>}>
+              <Switch>
+                {this.state.loggedInUser != null ? (
+                  <Route path="/c"
+                         render={(props) =>
+                             <LoggedInComponent {...props}
+                                                loggedInUser={this.state.loggedInUser}
+                                                setLoggedInUser ={this.setLoggedInUser}
+                             />}
+                  />
+                ) : (
+                  <Route render={(props) =>
+                             <LoggedOutComponent {...props}
+                                                loggedInUser={this.state.loggedInUser}
+                                                setLoggedInUser ={this.setLoggedInUser}
+                             />}
+                  />
+                )}
+              </Switch>
+            </Suspense>
+          </MuiThemeProvider>
+        </BrowserRouter>
+    );
+  }
 }
 
 serviceWorker.register();

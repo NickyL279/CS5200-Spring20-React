@@ -4,8 +4,9 @@ import { Switch } from "react-router-dom";
 import { withStyles } from "@material-ui/core";
 import Jobs from "./jobs/Jobs";
 import Users from "./users/Users";
-import Subscription from "./subscription/Subscription";
+import Subscription from "./profile/Profile";
 import PropsRoute from "../../shared/components/PropsRoute";
+// import NavBar from "./navigation/NavBar";
 
 const styles = theme => ({
   wrapper: {
@@ -45,25 +46,26 @@ const styles = theme => ({
 function Routing(props) {
   const {
     classes,
-    EmojiTextArea,
-    ImageCropper,
-    Dropzone,
-    DateTimePicker,
-    pushMessageToSnackbar,
-    posts,
-    transactions,
-    handleNumberChange,
-    handleSwitchToggle,
-    handleSelectChange,
-    toggleAccountActivation,
-    CardChart,
-    statistics,
-    targets,
-    isAccountActivated,
+    // EmojiTextArea,
+    // ImageCropper,
+    // Dropzone,
+    // DateTimePicker,
+    // pushMessageToSnackbar,
+    // posts,
+    // transactions,
+    // handleNumberChange,
+    // handleSwitchToggle,
+    // handleSelectChange,
+    // toggleAccountActivation,
+    // CardChart,
+    // statistics,
+    // targets,
+    // isAccountActivated,
     selectDashboard,
     selectPosts,
     selectSubscription,
-    openAddBalanceDialog
+    // openAddBalanceDialog
+    loggedInUser
   } = props;
   return (
     <div className={classes.wrapper}>
@@ -71,34 +73,35 @@ function Routing(props) {
         <PropsRoute
           path="/c/posts"
           component={Users}
-          EmojiTextArea={EmojiTextArea}
-          ImageCropper={ImageCropper}
-          Dropzone={Dropzone}
-          DateTimePicker={DateTimePicker}
-          pushMessageToSnackbar={pushMessageToSnackbar}
-          posts={posts}
+          // EmojiTextArea={EmojiTextArea}
+          // ImageCropper={ImageCropper}
+          // Dropzone={Dropzone}
+          // DateTimePicker={DateTimePicker}
+          // pushMessageToSnackbar={pushMessageToSnackbar}
+          // posts={posts}
           selectPosts={selectPosts}
         />
         <PropsRoute
           path="/c/subscription"
           component={Subscription}
-          transactions={transactions}
-          pushMessageToSnackbar={pushMessageToSnackbar}
+          // transactions={transactions}
+          // pushMessageToSnackbar={pushMessageToSnackbar}
           selectSubscription={selectSubscription}
-          openAddBalanceDialog={openAddBalanceDialog}
+          // openAddBalanceDialog={openAddBalanceDialog}
+          loggedInUser={loggedInUser}
         />
         <PropsRoute
           path=""
           component={Jobs}
-          handleNumberChange={handleNumberChange}
-          handleSwitchToggle={handleSwitchToggle}
-          handleSelectChange={handleSelectChange}
-          toggleAccountActivation={toggleAccountActivation}
-          pushMessageToSnackbar={pushMessageToSnackbar}
-          CardChart={CardChart}
-          statistics={statistics}
-          targets={targets}
-          isAccountActivated={isAccountActivated}
+          // handleNumberChange={handleNumberChange}
+          // handleSwitchToggle={handleSwitchToggle}
+          // handleSelectChange={handleSelectChange}
+          // toggleAccountActivation={toggleAccountActivation}
+          // pushMessageToSnackbar={pushMessageToSnackbar}
+          // CardChart={CardChart}
+          // statistics={statistics}
+          // targets={targets}
+          // isAccountActivated={isAccountActivated}
           selectDashboard={selectDashboard}
         />
       </Switch>
@@ -108,25 +111,26 @@ function Routing(props) {
 
 Routing.propTypes = {
   classes: PropTypes.object.isRequired,
-  EmojiTextArea: PropTypes.elementType,
-  ImageCropper: PropTypes.elementType,
-  Dropzone: PropTypes.elementType,
-  DateTimePicker: PropTypes.elementType,
-  pushMessageToSnackbar: PropTypes.func,
-  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
-  transactions: PropTypes.arrayOf(PropTypes.object).isRequired,
-  handleNumberChange: PropTypes.func,
-  handleSwitchToggle: PropTypes.func,
-  handleSelectChange: PropTypes.func,
-  toggleAccountActivation: PropTypes.func,
-  CardChart: PropTypes.elementType,
-  statistics: PropTypes.object.isRequired,
-  targets: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isAccountActivated: PropTypes.bool.isRequired,
+  // EmojiTextArea: PropTypes.elementType,
+  // ImageCropper: PropTypes.elementType,
+  // Dropzone: PropTypes.elementType,
+  // DateTimePicker: PropTypes.elementType,
+  // pushMessageToSnackbar: PropTypes.func,
+  // posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // transactions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // handleNumberChange: PropTypes.func,
+  // handleSwitchToggle: PropTypes.func,
+  // handleSelectChange: PropTypes.func,
+  // toggleAccountActivation: PropTypes.func,
+  // CardChart: PropTypes.elementType,
+  // statistics: PropTypes.object.isRequired,
+  // targets: PropTypes.arrayOf(PropTypes.object).isRequired,
+  // isAccountActivated: PropTypes.bool.isRequired,
   selectDashboard: PropTypes.func.isRequired,
   selectPosts: PropTypes.func.isRequired,
   selectSubscription: PropTypes.func.isRequired,
-  openAddBalanceDialog: PropTypes.func.isRequired
+  loggedInUser: PropTypes.object.isRequired
+  // openAddBalanceDialog: PropTypes.func.isRequired
 };
 
 export default withStyles(styles, { withTheme: true })(memo(Routing));

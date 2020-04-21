@@ -40,7 +40,7 @@ export default class UserService {
         formData.append('password', user.password);
 
         switch(user.dtype) {
-            case 'Studnt':
+            case 'Student':
                 userUrl = "addstudent"
                 formData.append('gradYear', user.gradYear);
                 formData.append('scholarship', user.scholarship);
@@ -75,4 +75,19 @@ export default class UserService {
                 console.log(response);
             });
 
+    authenticateUser = (username, password) =>
+        fetch(COURSE_API_URL + "userlogin/" + username + "/" + password, {
+            crossDomain:true,
+            method: 'GET',
+            headers: {'Content-Type':'application/json; charset=utf-8'}
+        })
+            .then(response => response.json())
+            .then(response => {
+                console.log(response);
+                    if (response.length > 0) {
+                        return response[0]
+                    } else {
+                        return "fail"
+                    }
+            })
 }
