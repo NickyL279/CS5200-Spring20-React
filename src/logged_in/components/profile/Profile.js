@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { Paper, withStyles } from "@material-ui/core";
 import ProfileForm from "./ProfileForm";
+import StudentAgreementForm from "./StudentAgreementForm";
 // import NavBar from "../navigation/NavBar";
 
 const styles = {
@@ -19,7 +20,10 @@ function Profile(props) {
 
   return (
     <Paper>
-<ProfileForm user = {loggedInUser} setLoggedInUser = {setLoggedInUser}/>
+      <ProfileForm user = {loggedInUser} setLoggedInUser = {setLoggedInUser}/>
+      {props.loggedInUser.dtype === "Student" && [
+      <StudentAgreementForm user = {loggedInUser} setLoggedInUser = {setLoggedInUser}/>
+      ]}
     </Paper>
   );
 }
