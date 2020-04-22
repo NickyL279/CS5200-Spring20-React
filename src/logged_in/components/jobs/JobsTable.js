@@ -72,6 +72,8 @@ class JobsTable extends React.Component {
       // onRowsDelete: this.handleDeleteRow,
       // serverSide: true,
       pagination: true,
+      print: false,
+      download: false,
       expandableRows: true,
       expandableRowsOnClick: true,
       customToolbarSelect: (selectedRows, displayData, setSelectedRows) => (

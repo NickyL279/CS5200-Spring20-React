@@ -69,6 +69,8 @@ class UsersTable extends React.Component {
       filterType: "dropdown",
       responsive: "stacked",
       rowsPerPage: 10,
+      print: false,
+      download: false,
       onRowsDelete: this.handleDeleteRow,
       serverSide: true,
       onRowClick: (rowData, rowMeta) => {this.props.rowClickHandler(rowData[0]);console.log(rowMeta)},

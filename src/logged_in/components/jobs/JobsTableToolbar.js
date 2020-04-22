@@ -10,6 +10,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 
 const defaultToolbarSelectStyles = {
     iconButton: {
@@ -72,7 +74,17 @@ class JobsTableToolbar extends React.Component {
 
         return (
     <React.Fragment>
-            <div className={classes.iconContainer}>
+        <div className={classes.iconContainer}>
+            <Tooltip title={"Create Application"} >
+                <IconButton className={classes.iconButton} onClick={this.handleClickBlockSelected}>
+                    <AssignmentIcon className={classes.icon} />
+                </IconButton>
+            </Tooltip>
+            <Tooltip title={"Add to Favorites"} >
+                <IconButton className={classes.iconButton} onClick={this.handleClickBlockSelected}>
+                    <FavoriteBorderIcon className={classes.icon} />
+                </IconButton>
+            </Tooltip>
                 <Tooltip title={"Add to List"} >
                     <IconButton className={classes.iconButton} onClick={this.handleClickBlockSelected}>
                         <PlaylistAddIcon className={classes.icon} />
