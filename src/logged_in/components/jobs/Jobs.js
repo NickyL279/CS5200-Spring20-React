@@ -50,14 +50,12 @@ class Jobs extends PureComponent {
             })
 
     fetchAllJobs = () => {
-        this.setState({ loading: true });
+        this.setState({loading: true});
         (new JobService()).findJobs()
             .then(d => {
                 console.log("fetch all jobs")
-                console.log(d)
-                this.setState({allJobsData: d, selectedUser: undefined, loading:false})
-            })
-            .then(console.log(this.state));
+                this.setState({allJobsData: d, selectedUser: undefined, loading: false})
+            });
     }
 
     fetchFavorites = () => {
@@ -83,30 +81,31 @@ class Jobs extends PureComponent {
     render() {
 
         return (
-            <Fragment>
-                {this.state.loading === true && [<LinearProgress />]}
+            <Fragment key='0'>
+                {this.state.loading === true && [<LinearProgress key='x'/>]}
 
                 {this.props.loggedInUser.dtype === "Admin" ? [
-                    <ExpansionPanel defaultExpanded={true}>
+                    <ExpansionPanel key='1' defaultExpanded={true}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                             <Typography style={{fontSize: "22px"}}> All Jobs </Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails className={this.props.classes.dBlock}>
                             <JobsTableAdmin data={this.state.allJobsData}
                                 // rowClickHandler={this.handleRowClick}
-                                       rowClickHandler={console.log("row clicked")}
+                                            rowClickHandler={console.log("row clicked")}
                             />
                         </ExpansionPanelDetails>
                     </ExpansionPanel>,
-                    <ExpansionPanel defaultExpanded={false}>
+                    <ExpansionPanel key='2' defaultExpanded={false}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                            <Typography style={{fontSize: "22px"}}> All Job Applications </Typography>
+                            <Typography style={{fontSize: "22px"}}> All Job
+                                Applications </Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails className={this.props.classes.dBlock}>
 
                         </ExpansionPanelDetails>
                     </ExpansionPanel>,
-                    <ExpansionPanel defaultExpanded={false}>
+                    <ExpansionPanel key='3' defaultExpanded={false}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                             <Typography style={{fontSize: "22px"}}> All Job Lists </Typography>
                         </ExpansionPanelSummary>
@@ -114,20 +113,20 @@ class Jobs extends PureComponent {
 
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
-                    ] : [
-                <ExpansionPanel defaultExpanded={true}>
-                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                        <Typography style={{fontSize: "22px"}}>All Jobs </Typography>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails className={this.props.classes.dBlock}>
-                        <JobsTable data={this.state.allJobsData}
-                            // rowClickHandler={this.handleRowClick}
-                                   rowClickHandler={console.log("row clicked")}
-                        />
-                    </ExpansionPanelDetails>
-                </ExpansionPanel>]}
+                ] : [
+                    <ExpansionPanel key='4' defaultExpanded={true}>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                            <Typography style={{fontSize: "22px"}}>All Jobs </Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails className={this.props.classes.dBlock}>
+                            <JobsTable data={this.state.allJobsData}
+                                // rowClickHandler={this.handleRowClick}
+                                       rowClickHandler={console.log("row clicked")}
+                            />
+                        </ExpansionPanelDetails>
+                    </ExpansionPanel>]}
                 {this.props.loggedInUser.dtype === "Student" && [
-                    <ExpansionPanel defaultExpanded={false}>
+                    <ExpansionPanel key='5' defaultExpanded={false}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                             <Typography style={{fontSize: "22px"}}>Favorite Jobs </Typography>
                         </ExpansionPanelSummary>
@@ -139,7 +138,7 @@ class Jobs extends PureComponent {
                         </ExpansionPanelDetails>
                     </ExpansionPanel>,
 
-                    <ExpansionPanel defaultExpanded={false}>
+                    <ExpansionPanel key='6' defaultExpanded={false}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                             <Typography style={{fontSize: "22px"}}>Job Applications </Typography>
                         </ExpansionPanelSummary>
@@ -152,26 +151,28 @@ class Jobs extends PureComponent {
                     </ExpansionPanel>
                 ]}
                 {this.props.loggedInUser.dtype === "Advisor" && [
-                        <ExpansionPanel defaultExpanded={false}>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
-                                <Typography style={{fontSize: "22px"}}>My Assigned
-                                    Students </Typography>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails className={this.props.classes.dBlock}>
-                                <AssignedStudentsTable data={this.state.assignedUsersData}
-                                            rowClickHandler={this.handleRowClick}/>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>]}
+                    <ExpansionPanel key='7' defaultExpanded={false}>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
+                            <Typography style={{fontSize: "22px"}}>My Assigned
+                                Students </Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails className={this.props.classes.dBlock}>
+                            <AssignedStudentsTable data={this.state.assignedUsersData}
+                                                   rowClickHandler={this.handleRowClick}/>
+                        </ExpansionPanelDetails>
+                    </ExpansionPanel>]}
                 {(this.props.loggedInUser.dtype === "Advisor" ||
-                    this.props.loggedInUser.dtype === "Admin")
-                    && [
-                        <br/>,
-                        <Typography>Organize Job Lists</Typography>,
+                  this.props.loggedInUser.dtype === "Admin")
+                 && [
+                    <div key='8'>
+                        <br/>
+                        <Typography>Organize Job Lists</Typography>
                         <HighlightedInformation>
                             Job list management is not yet connected to the database.
-                        </HighlightedInformation>,
+                        </HighlightedInformation>
                         <JobListsTree/>
-                        ]}
+                    </div>
+                ]}
 
             </Fragment>
         );

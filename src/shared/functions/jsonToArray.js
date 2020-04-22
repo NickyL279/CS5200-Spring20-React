@@ -7,7 +7,6 @@ function jsonToArray(json, arrayOfDesiredColumns) {
             dataArray.push(rowArray);
         })
     }
-    console.log(dataArray)
     return dataArray;
 }
 
