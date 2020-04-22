@@ -55,6 +55,24 @@ export default class UserService {
          });
     };
 
+    findUserById = (userId) =>
+        fetch(COURSE_API_URL + "allUsers", {
+            crossDomain:true,
+            method: 'GET',
+            headers: {'Content-Type':'application/json; charset=utf-8'}
+        })
+            .then(response => response.json())
+            .then(response => {
+                var user = null
+                response.forEach(row => {
+                    if (row.id === userId) {
+                        console.log("found user");
+                        user = row
+                    }
+                })
+                return user;
+            });
+
     findAllUsers = () =>
         fetch(COURSE_API_URL + "allUsers", {
             crossDomain:true,

@@ -1,5 +1,5 @@
 import React from "react";
-import Styles from "./UserFormStyles";
+import Styles from "../users/UserFormStyles";
 import { Form, Field } from "react-final-form";
 import { Radio, Select } from 'final-form-material-ui';
 import {
@@ -11,19 +11,26 @@ import {
 import UserService from "../../../shared/services/UserService";
 
 
-class UsersForm extends React.Component {
+class UsersEditForm extends React.Component {
 
     onSubmit = values => {
-        (new UserService()).createUser(values).then(()=>this.props.datacall())
+        console.log("values");
+        console.log(values);
+        (new UserService()).updateUser(this.props.user.id, values)
+            .then(()=> {
+                      alert("User updated.")
+                this.props.datacall()
+                  }
+            )
     };
 
     render() {
-        return(
+        return (
             <Styles>
                 <Form
                     onSubmit={this.onSubmit}
                     initialValues={{dtype: 'Student'}}
-                    render={({handleSubmit, reset, submitting, pristine, values, invalid}) => {
+                    render={({handleSubmit,submitting,/* pristine,  reset,*/ values, invalid}) => {
 
                         switch (values.dtype) {
                             case 'Student':
@@ -40,6 +47,9 @@ class UsersForm extends React.Component {
                             default:
                             // code block
                         }
+
+                        // console.log(user.user);
+                        console.log(this.props);
 
                         return (<form onSubmit={handleSubmit}>
                                 <div key="0">
@@ -90,6 +100,7 @@ class UsersForm extends React.Component {
                                         component="input"
                                         type="text"
                                         validate={val => val ? undefined : 'Required'}
+                                        defaultValue={this.props.user.firstName}
                                     />
                                 </div>
                                 <div key="2">
@@ -99,6 +110,7 @@ class UsersForm extends React.Component {
                                         component="input"
                                         type="text"
                                         validate={val => val ? undefined : 'Required'}
+                                        defaultValue={this.props.user.lastName}
                                     />
                                 </div>
                                 <div key="3">
@@ -108,6 +120,7 @@ class UsersForm extends React.Component {
                                         component="input"
                                         type="text"
                                         validate={val => val ? undefined : 'Required'}
+                                        defaultValue={this.props.user.username}
                                     />
                                 </div>
                                 <div key="4">
@@ -117,6 +130,7 @@ class UsersForm extends React.Component {
                                         component="input"
                                         type="text"
                                         validate={val => val ? undefined : 'Required'}
+                                        defaultValue={this.props.user.password}
                                     />
                                 </div>
                                 {values.dtype === 'Student' && [
@@ -126,7 +140,7 @@ class UsersForm extends React.Component {
                                             name="scholarship"
                                             component="input"
                                             type="text"
-                                            placeholder="$ 0"
+                                            defaultValue={this.props.user.scholarship}
                                         />
                                     </div>,
                                     <div key="6">
@@ -137,6 +151,7 @@ class UsersForm extends React.Component {
                                             component={Select}
                                             label="Select a Major"
                                             formControlProps={{fullWidth: true}}
+                                            defaultValue={this.props.user.major}
                                         >
                                             <MenuItem value="CS">Computer Science</MenuItem>
                                             <MenuItem value="BS">Business</MenuItem>
@@ -148,14 +163,7 @@ class UsersForm extends React.Component {
 
                                 <div className="buttons">
                                     <button type="submit" disabled={submitting || invalid}>
-                                        Submit
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={reset}
-                                        disabled={submitting || pristine}
-                                    >
-                                        Reset
+                                        Submit Update
                                     </button>
                                 </div>
                                 <pre>{JSON.stringify(values, 0, 2)}</pre>
@@ -164,8 +172,8 @@ class UsersForm extends React.Component {
                     }}
                 />
             </Styles>
-        )
+        );
     }
 }
 
-export default UsersForm
+export default UsersEditForm

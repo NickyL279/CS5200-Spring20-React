@@ -71,6 +71,7 @@ class UsersTable extends React.Component {
       rowsPerPage: 10,
       onRowsDelete: this.handleDeleteRow,
       serverSide: true,
+      onRowClick: (rowData, rowMeta) => {this.props.rowClickHandler(rowData[0]);console.log(rowMeta)},
       onTableChange: (action, tableState) => {
         console.log(action)
         console.log(tableState)
@@ -86,7 +87,8 @@ class UsersTable extends React.Component {
 }
 
 UsersTable.propTypes = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
+  rowClickHandler: PropTypes.func.isRequired
 }
 
 export default UsersTable;
