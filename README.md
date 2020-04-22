@@ -18,7 +18,8 @@ Project Requirements: https://docs.google.com/document/d/1DYO3wTJGfcVzF9jCS8UMe_
 Built with:  
 React SaaS template https://github.com/dunky11/react-saas-template  
 MUI-Datatables https://github.com/gregnb/mui-datatables   
-React Final Form https://github.com/final-form/react-final-form#-react-final-form  
+React Final Form https://github.com/final-form/react-final-form#-react-final-form   
+React Sortable Tree  https://github.com/frontend-collective/react-sortable-tree  
 Licensed under the MIT License - see the [LICENSE.md](https://github.com/dunky11/react-saas-template/blob/master/LICENSE) file for details.
 
 

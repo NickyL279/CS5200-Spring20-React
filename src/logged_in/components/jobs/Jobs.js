@@ -1,7 +1,24 @@
-import React, {Fragment, PureComponent/*, useEffect*/} from "react";
+import React, {Fragment, PureComponent} from "react";
 import PropTypes from "prop-types";
 import JobsTable from "./JobsTable";
 import JobService from "../../../shared/services/JobService";
+import {
+    // ExpansionPanel,
+    // ExpansionPanelDetails,
+    // ExpansionPanelSummary,
+    Typography, withStyles
+} from "@material-ui/core";
+// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import withWidth from "@material-ui/core/withWidth";
+// import JobsListsTable from "./JobListsTable";
+import JobListsTree from "./JobListsTree";
+import HighlightedInformation from "../../../shared/components/HighlightedInformation";
+
+const styles = {
+    divider: {
+        backgroundColor: "rgba(0, 0, 0, 0.26)"
+    }
+};
 
 class Jobs extends PureComponent {
 
@@ -33,14 +50,12 @@ class Jobs extends PureComponent {
   }
 
   componentDidMount() {
-    // const {
-    //   selectDashboard
-    // } = this.props;
-    //
-    //  useEffect(selectDashboard, [selectDashboard]);
+      this.props.selectDashboard()
   }
 
   render() {
+
+
     return (
         <Fragment>
           <JobsTable data={this.state.data}
@@ -48,6 +63,12 @@ class Jobs extends PureComponent {
               rowClickHandler={console.log("row clicked")}
           />
           <br/>
+            <Typography>Manage Job Lists</Typography>
+            <HighlightedInformation>
+                Job list management is not yet connected to the database.
+            </HighlightedInformation>
+            <JobListsTree/>
+
         </Fragment>
     );
   }
@@ -55,8 +76,8 @@ class Jobs extends PureComponent {
 
 Jobs.propTypes = {
   selectDashboard: PropTypes.func.isRequired,
-  // classes: PropTypes.object.isRequired,
-  // theme: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
 };
+export default withWidth()(withStyles(styles, {withTheme: true})(Jobs));
 
-export default Jobs;

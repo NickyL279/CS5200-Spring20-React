@@ -126,7 +126,7 @@ class JobsTable extends React.Component {
     return (
         <React.Fragment>
           <MuiThemeProvider theme={theme}>
-            <MUIDataTable title={"Jobs Table"} data={this.state.data} columns={columns} options={options} />
+            <MUIDataTable title={"All Jobs"} data={this.state.data} columns={columns} options={options} />
           </MuiThemeProvider>
         </React.Fragment>
     );
@@ -134,8 +134,7 @@ class JobsTable extends React.Component {
 }
 
 JobsTable.propTypes = {
-  data: PropTypes.array.isRequired,
-  rowClickHandler: PropTypes.func.isRequired
+  data: PropTypes.array.isRequired
 }
 
 export default JobsTable;

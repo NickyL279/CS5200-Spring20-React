@@ -330,7 +330,7 @@ function NavBar(props) {
 }
 
 NavBar.propTypes = {
-  selectedTab: PropTypes.string.isRequired,
+  // selectedTab: PropTypes.string.isRequired,
   width: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
   loggedInUser: PropTypes.object.isRequired,

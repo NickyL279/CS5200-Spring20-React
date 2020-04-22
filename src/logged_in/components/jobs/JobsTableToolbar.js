@@ -1,10 +1,15 @@
 import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
-import IndeterminateCheckBoxIcon from "@material-ui/icons/IndeterminateCheckBox";
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import { withStyles } from "@material-ui/core/styles";
+import JobListsSelect from "./JobListsSelect";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
 
 const defaultToolbarSelectStyles = {
     iconButton: {
@@ -36,29 +41,64 @@ class JobsTableToolbar extends React.Component {
 
     handleClickBlockSelected = () => {
         console.log(`block users with dataIndexes: ${this.props.selectedRows.data.map(row => row.dataIndex)}`);
+        this.setState({ open: true })
     };
+
+    //-----------------------------DIALOG
+
+    state = {
+        value: null,
+        open: false,
+        dialogValue:{title: '', year: ''}
+    }
+
+     handleClose = () => {
+         this.setState({ dialogValue: {title: '', year: ''}, open: false })
+    };
+
+     handleSubmit = (event) => {
+        event.preventDefault();
+        this.setState({ value:
+                {
+                    title: this.state.dialogValue.title,
+                    year: parseInt(this.state.dialogValue.year, 10),
+                }})
+        this.handleClose();
+    };
+    //--------------------DIALOG------------//
 
     render() {
         const { classes } = this.props;
 
         return (
+    <React.Fragment>
             <div className={classes.iconContainer}>
-                <Tooltip title={"Deselect ALL"}>
-                    <IconButton className={classes.iconButton} onClick={this.handleClickDeselectAll}>
-                        <IndeterminateCheckBoxIcon className={classes.icon} />
-                    </IconButton>
-                </Tooltip>
-                <Tooltip title={"Inverse selection"}>
-                    <IconButton className={classes.iconButton} onClick={this.handleClickInverseSelection}>
-                        <CompareArrowsIcon className={[classes.icon, classes.inverseIcon].join(" ")} />
-                    </IconButton>
-                </Tooltip>
-                <Tooltip title={"Block selected"}>
+                <Tooltip title={"Add to List"} >
                     <IconButton className={classes.iconButton} onClick={this.handleClickBlockSelected}>
                         <PlaylistAddIcon className={classes.icon} />
                     </IconButton>
                 </Tooltip>
             </div>
+        <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+            <form onSubmit={this.handleSubmit}>
+                <DialogTitle id="form-dialog-title">Add Selected Jobs</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Choose a list to add the selected jobs to.
+                    </DialogContentText>
+                   <JobListsSelect/>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={this.handleClose} color="primary">
+                        Cancel
+                    </Button>
+                    <Button type="submit" color="primary">
+                        Add
+                    </Button>
+                </DialogActions>
+            </form>
+        </Dialog>
+    </React.Fragment>
         );
     }
 }
