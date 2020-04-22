@@ -2,6 +2,8 @@ import React, {Fragment, PureComponent} from "react";
 import PropTypes from "prop-types";
 import JobsTable from "./JobsTable";
 import JobService from "../../../shared/services/JobService";
+import LinearProgress from '@material-ui/core/LinearProgress';
+
 import {
     ExpansionPanel,
     ExpansionPanelDetails,
@@ -36,7 +38,8 @@ class Jobs extends PureComponent {
         favoritesData: [],
         applicationsData: [],
         assignedUsersData: [],
-        selectedUser: undefined
+        selectedUser: undefined,
+        loading: false
     };
 
     handleRowClick = (userId) =>
@@ -47,11 +50,12 @@ class Jobs extends PureComponent {
             })
 
     fetchAllJobs = () => {
+        this.setState({ loading: true });
         (new JobService()).findJobs()
             .then(d => {
                 console.log("fetch all jobs")
                 console.log(d)
-                this.setState({allJobsData: d, selectedUser: undefined})
+                this.setState({allJobsData: d, selectedUser: undefined, loading:false})
             })
             .then(console.log(this.state));
     }
@@ -80,6 +84,8 @@ class Jobs extends PureComponent {
 
         return (
             <Fragment>
+                {this.state.loading === true && [<LinearProgress />]}
+
                 {this.props.loggedInUser.dtype === "Admin" ? [
                     <ExpansionPanel defaultExpanded={true}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
