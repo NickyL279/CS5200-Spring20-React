@@ -1,14 +1,43 @@
+import React from "react";
+import PropTypes from "prop-types";
 import MUIDataTable from "mui-datatables";
+// import JobService from "../../../shared/services/JobService";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import React from "react";
-import JobService from "../../../shared/services/JobService";
 
-    const data  = (new JobService()).findJobs();
-  //const data = []
+
+class JobsTable extends React.Component {
+
+  state = {
+    data: []
+  };
+
+  componentDidMount() {
+    this.setState({data: this.props.data});
+    console.log("UsersTable didmount")
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.data !== this.props.data) {
+      this.setState({ data: this.props.data });
+    }
+  }
+
+  // handleDeleteRow = (rowsDeleted) => {
+  //   const userIds = rowsDeleted.data.map(row => this.state.data[row.dataIndex][0]);
+  //   userIds.forEach(id => (new UserService()).deleteUser(id).then(console.log("Deleted user " + id)))
+  // }
+
+  render() {
 
     const columns = [
+      {
+        name: "Id",
+        options: {
+          filter: true,
+        }
+      },
       {
         name: "Title",
         options: {
@@ -38,9 +67,20 @@ import JobService from "../../../shared/services/JobService";
     const options = {
       filter: true,
       filterType: 'dropdown',
-      responsive: 'scrollMaxHeight',
+      // responsive: "stacked",
+      rowsPerPage: 10,
+      // onRowsDelete: this.handleDeleteRow,
+      // serverSide: true,
+      pagination: true,
       expandableRows: true,
       expandableRowsOnClick: true,
+      onTableChange: (action, tableState) => {
+        console.log(action)
+        console.log(tableState)
+        // this.xhrRequest('my.api.com/tableData', result => {
+        //   this.setState({ data: result });
+        // });
+      },
       // serverSide: true,
       // onTableChange: (action, tableState) => {
       //   this.xhrRequest('my.api.com/tableData', result => {
@@ -57,36 +97,42 @@ import JobService from "../../../shared/services/JobService";
       rowsExpanded: [],
       renderExpandableRow: (rowData/*, rowMeta*/) => {
         const colSpan = rowData.length + 1;
-        const description = rowData[3].replace("\\n", "\n");//.replace(/\n/g, "<br />");
+        const description = rowData[4].replace("\\n", "\n");//.replace(/\n/g, "<br />");
         return (
-          <TableRow>
-            <TableCell colSpan={colSpan}>
-              {description}
-            </TableCell>
-          </TableRow>
+            <TableRow>
+              <TableCell colSpan={colSpan}>
+                {description}
+              </TableCell>
+            </TableRow>
         );
       },
       onRowsExpand: (curExpanded, allExpanded) => console.log(curExpanded, allExpanded)
     };
 
     const theme = createMuiTheme({
-      overrides: {
-        MUIDataTableSelectCell: {
-          expandDisabled: {
-            // Soft hide the button.
-            visibility: 'hidden',
-          },
-        },
-      },
-    });
+                                   overrides: {
+                                     MUIDataTableSelectCell: {
+                                       expandDisabled: {
+                                         // Soft hide the button.
+                                         visibility: 'hidden',
+                                       },
+                                     },
+                                   },
+                                 });
 
-export default function JobsTable() {
     return (
         <React.Fragment>
-      <MuiThemeProvider theme={theme}>
-        <MUIDataTable title={"JobsTable"} data={data} columns={columns} options={options} />
-      </MuiThemeProvider>
-          </React.Fragment>
+          <MuiThemeProvider theme={theme}>
+            <MUIDataTable title={"Jobs Table"} data={this.state.data} columns={columns} options={options} />
+          </MuiThemeProvider>
+        </React.Fragment>
     );
-
   }
+}
+
+JobsTable.propTypes = {
+  data: PropTypes.array.isRequired,
+  rowClickHandler: PropTypes.func.isRequired
+}
+
+export default JobsTable;

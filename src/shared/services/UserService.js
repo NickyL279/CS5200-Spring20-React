@@ -1,21 +1,9 @@
+import jsonToArray from "../functions/jsonToArray";
+
 const COURSE_API_URL= 'https://cs5200-spring2020-hartenstine.com/api/';
 // const COURSE_API_URL= 'http://localhost:8080/api/';
 // added this comment
 
-function jsonToArray(json){
-    const dataArray = [];
-    if(json.length > 0){
-    json.forEach((row) =>
-                 {
-                     const rowArray = [];
-                     const keys = ["id", "dtype", "firstName", "lastName", "username"];
-                     keys.forEach((key) => rowArray.push(row[key]));
-        dataArray.push(rowArray);
-    })
-}
-    console.log(dataArray)
-    return dataArray;
-}
 
 export default class UserService {
 
@@ -82,7 +70,9 @@ export default class UserService {
             .then(response => response.json())
             .then(response => {
                 console.log(response);
-                return jsonToArray(response);
+                return jsonToArray(
+                    response,
+                    ["id", "dtype", "firstName", "lastName", "username"]);
             });
 
     updateUser = (userId, user) =>
