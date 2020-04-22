@@ -16,6 +16,15 @@ export default class JobService {
                     response,
                     ["id","title","company","location","description"]);
             });
+    deleteJob = jobId =>
+        fetch(COURSE_API_URL + "jobs/" + jobId, {
+            crossDomain:true,
+            method: 'DELETE',
+            headers: {'Content-Type':'application/json; charset=utf-8'}
+        })
+            .then(response => {
+                console.log(response);
+            });
 
 }
 
