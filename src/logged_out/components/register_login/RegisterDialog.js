@@ -40,13 +40,19 @@ class RegisterDialog extends PureComponent {
 
   register = () => {
 
-    const { setStatus, history } = this.props;
+    const { setStatus, history, setLoggedInUser } = this.props;
 
     if (this.props.status === "accountCreated"){
-      setTimeout(() => {
-        history.push("/c/dashboard");
-      }, 150);
-      return;
+      this.state.userService.authenticateUser(this.registerEmail.value,
+                                              this.registerPassword.value)
+          .then((result) => {
+            if (result === "fail") {
+                alert("account creation failed");
+            } else {
+                setLoggedInUser(result);
+                history.push("/c/dashboard");
+            }
+          });
     }
 
     if (this.registerPassword.value !== this.registerPasswordRepeat.value) {
@@ -209,7 +215,8 @@ RegisterDialog.propTypes = {
   status: PropTypes.string,
   setStatus: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  setLoggedInUser: PropTypes.func.isRequired
 };
 
 export default withRouter(withStyles(styles, { withTheme: true })(RegisterDialog));

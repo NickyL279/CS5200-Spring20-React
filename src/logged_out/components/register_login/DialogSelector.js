@@ -42,6 +42,7 @@ class DialogSelector extends PureComponent {
             openTermsDialog={openTermsDialog}
             status={registerStatus}
             setStatus={this.setRegisterStatus}
+            setLoggedInUser={setLoggedInUser}
           />
         );
       case "login":
