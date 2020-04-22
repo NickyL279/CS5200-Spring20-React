@@ -80,6 +80,7 @@ function Routing(props) {
           // DateTimePicker={DateTimePicker}
           // pushMessageToSnackbar={pushMessageToSnackbar}
           // posts={posts}
+          loggedInUser={loggedInUser}
           selectPosts={selectPosts}
         />
         <PropsRoute
@@ -105,6 +106,7 @@ function Routing(props) {
           // targets={targets}
           // isAccountActivated={isAccountActivated}
           selectDashboard={selectDashboard}
+          loggedInUser={loggedInUser}
         />
       </Switch>
     </div>
