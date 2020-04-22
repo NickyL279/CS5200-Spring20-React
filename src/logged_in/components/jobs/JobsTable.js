@@ -5,7 +5,7 @@ import MUIDataTable from "mui-datatables";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import JobsTableToolbar from "./JobsTableToolbar";
+import JobsTableToolbar from "./jobsTableToolbar/JobsTableToolbar";
 
 class JobsTable extends React.Component {
 

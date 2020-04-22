@@ -29,7 +29,7 @@ class UsersEditForm extends React.Component {
             <Styles>
                 <Form
                     onSubmit={this.onSubmit}
-                    initialValues={{dtype: 'Student'}}
+                    initialValues={this.props.user}
                     render={({handleSubmit,submitting,/* pristine,  reset,*/ values, invalid}) => {
 
                         switch (values.dtype) {
@@ -56,6 +56,17 @@ class UsersEditForm extends React.Component {
                                     <label>User Type</label>
                                     <FormControl component="fieldset">
                                         <RadioGroup row>
+                                            <FormControlLabel
+                                                label="User"
+                                                control={
+                                                    <Field
+                                                        name="dtype"
+                                                        component={Radio}
+                                                        type="radio"
+                                                        value="User"
+                                                    />
+                                                }
+                                            />
                                             <FormControlLabel
                                                 label="Student"
                                                 control={
@@ -100,7 +111,6 @@ class UsersEditForm extends React.Component {
                                         component="input"
                                         type="text"
                                         validate={val => val ? undefined : 'Required'}
-                                        defaultValue={this.props.user.firstName}
                                     />
                                 </div>
                                 <div key="2">
@@ -110,7 +120,6 @@ class UsersEditForm extends React.Component {
                                         component="input"
                                         type="text"
                                         validate={val => val ? undefined : 'Required'}
-                                        defaultValue={this.props.user.lastName}
                                     />
                                 </div>
                                 <div key="3">
@@ -120,7 +129,6 @@ class UsersEditForm extends React.Component {
                                         component="input"
                                         type="text"
                                         validate={val => val ? undefined : 'Required'}
-                                        defaultValue={this.props.user.username}
                                     />
                                 </div>
                                 <div key="4">
@@ -130,7 +138,6 @@ class UsersEditForm extends React.Component {
                                         component="input"
                                         type="text"
                                         validate={val => val ? undefined : 'Required'}
-                                        defaultValue={this.props.user.password}
                                     />
                                 </div>
                                 {values.dtype === 'Student' && [
@@ -140,7 +147,6 @@ class UsersEditForm extends React.Component {
                                             name="scholarship"
                                             component="input"
                                             type="text"
-                                            defaultValue={this.props.user.scholarship}
                                         />
                                     </div>,
                                     <div key="6">
@@ -151,7 +157,6 @@ class UsersEditForm extends React.Component {
                                             component={Select}
                                             label="Select a Major"
                                             formControlProps={{fullWidth: true}}
-                                            defaultValue={this.props.user.major}
                                         >
                                             <MenuItem value="CS">Computer Science</MenuItem>
                                             <MenuItem value="BS">Business</MenuItem>
