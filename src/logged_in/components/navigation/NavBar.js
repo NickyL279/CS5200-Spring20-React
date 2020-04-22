@@ -21,8 +21,8 @@ import {
   withWidth
 } from "@material-ui/core";
 import DashboardIcon from "@material-ui/icons/Dashboard";
-import ImageIcon from "@material-ui/icons/Image";
-import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 import MenuIcon from "@material-ui/icons/Menu";
 // import NavigationDrawer from "../../../shared/components/NavigationDrawer";
@@ -134,21 +134,21 @@ function NavBar(props) {
     onClick: console.log("Posts clicked"),
     icon: {
       desktop: (
-          <ImageIcon
+          <PeopleOutlineIcon
               className={
                 selectedTab === "Posts" ? classes.textPrimary : "text-white"
               }
               fontSize="small"
           />
       ),
-      mobile: <ImageIcon className="text-white" />
+      mobile: <PeopleOutlineIcon className="text-white" />
     }
   }
 
   const menuItems = [
     {
       link: "/c/dashboard",
-      name: "Dashboard",
+      name: "Jobs Dashboard",
       onClick: console.log("Dashboard clicked"),
       icon: {
         desktop: (
@@ -168,7 +168,7 @@ function NavBar(props) {
       onClick: console.log("Subscription clicked"),
       icon: {
         desktop: (
-          <AccountBalanceIcon
+          <AccountCircleIcon
             className={
               selectedTab === "Subscription"
                 ? classes.textPrimary
@@ -177,7 +177,7 @@ function NavBar(props) {
             fontSize="small"
           />
         ),
-        mobile: <AccountBalanceIcon className="text-white" />
+        mobile: <AccountCircleIcon className="text-white" />
       }
     }
   ];

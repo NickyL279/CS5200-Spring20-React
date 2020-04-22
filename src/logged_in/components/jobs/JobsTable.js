@@ -5,7 +5,7 @@ import MUIDataTable from "mui-datatables";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-
+import JobsTableToolbar from "./JobsTableToolbar";
 
 class JobsTable extends React.Component {
 
@@ -74,6 +74,9 @@ class JobsTable extends React.Component {
       pagination: true,
       expandableRows: true,
       expandableRowsOnClick: true,
+      customToolbarSelect: (selectedRows, displayData, setSelectedRows) => (
+          <JobsTableToolbar selectedRows={selectedRows} displayData={displayData} setSelectedRows={setSelectedRows} />
+      ),
       onTableChange: (action, tableState) => {
         console.log(action)
         console.log(tableState)
