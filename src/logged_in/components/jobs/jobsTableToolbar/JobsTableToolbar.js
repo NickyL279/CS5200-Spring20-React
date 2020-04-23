@@ -89,24 +89,26 @@ class JobsTableToolbar extends React.Component {
             <React.Fragment>
 
                 <div className={classes.iconContainer}>
-                    <Tooltip title={"Create Application"}>
+                    {this.props.loggedInUser.dtype === "Student" && [
+                    <Tooltip key="1" title={"Create Application"}>
                         <IconButton className={classes.iconButton}
                                     onClick={this.handleClickCreateApplication}>
                             <AssignmentIcon className={classes.icon}/>
                         </IconButton>
-                    </Tooltip>
-                    <Tooltip title={"Add to Favorites"}>
+                    </Tooltip>,
+                    <Tooltip key="2" title={"Add to Favorites"}>
                         <IconButton className={classes.iconButton}
                                     onClick={this.handleClickAddToFavorites}>
                             <FavoriteBorderIcon className={classes.icon}/>
                         </IconButton>
-                    </Tooltip>
-                    <Tooltip title={"Add to List"}>
+                    </Tooltip>]}
+                    {this.props.loggedInUser.dtype === "Advisor" && [
+                    <Tooltip key="3" title={"Add to List"}>
                         <IconButton className={classes.iconButton}
                                     onClick={this.handleClickAddToList}>
                             <PlaylistAddIcon className={classes.icon}/>
                         </IconButton>
-                    </Tooltip>
+                    </Tooltip>]}
                 </div>
 
                 <JobsListsDialog handleClose={this.handleCloseJobListsDialog}

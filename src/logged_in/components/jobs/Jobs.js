@@ -4,6 +4,7 @@ import JobsTable from "./JobsTable";
 import JobService from "../../../shared/services/JobService";
 import LinearProgress from '@material-ui/core/LinearProgress';
 import StudentService from "../../../shared/services/StudentService";
+import AdvisorService from "../../../shared/services/AdvisorService";
 
 import {
     ExpansionPanel,
@@ -73,7 +74,12 @@ class Jobs extends PureComponent {
     }
 
     fetchAssignedUsers = () => {
-        console.log("fetch assigned users")
+        (new AdvisorService()).findStudentsForAdvisor(this.props.loggedInUser.id)
+            .then(d => {
+                console.log("fetch students for advisor")
+                console.log(d)
+                this.setState({assignedUsersData: d})
+            });
     }
 
     componentDidMount() {
@@ -158,7 +164,7 @@ class Jobs extends PureComponent {
                     </ExpansionPanel>
                 ]}
                 {this.props.loggedInUser.dtype === "Advisor" && [
-                    <ExpansionPanel key='7' defaultExpanded={false}>
+                    <ExpansionPanel key='7' defaultExpanded={true}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                             <Typography style={{fontSize: "22px"}}>My Assigned
                                 Students </Typography>

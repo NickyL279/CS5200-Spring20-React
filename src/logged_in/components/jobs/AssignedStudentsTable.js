@@ -64,16 +64,13 @@ class AssignedStudentsTable extends React.Component {
     ];
 
     const options = {
-      filter: true,
-      selectableRows: 'multiple',
-      filterType: "dropdown",
+      disableToolbarSelect: true,
+      selectableRows: "none",
       responsive: "stacked",
       rowsPerPage: 10,
       print: false,
       download: false,
-      onRowsDelete: this.handleDeleteRow,
       serverSide: true,
-      onRowClick: (rowData, rowMeta) => {this.props.rowClickHandler(rowData[0]);console.log(rowMeta)},
       onTableChange: (action, tableState) => {
         console.log(action)
         console.log(tableState)
