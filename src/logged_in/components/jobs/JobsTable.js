@@ -71,6 +71,7 @@ class JobsTable extends React.Component {
       rowsPerPage: 10,
       // onRowsDelete: this.handleDeleteRow,
       // serverSide: true,
+      selectableRows: "single",
       pagination: true,
       print: false,
       download: false,
@@ -81,6 +82,7 @@ class JobsTable extends React.Component {
                             displayData={displayData}
                             setSelectedRows={setSelectedRows}
                             reloadApplications={this.props.reloadApplications}
+                            reloadFavorites={this.props.reloadFavorites}
                             loggedInUser={this.props.loggedInUser}
           />
       ),
@@ -143,7 +145,8 @@ class JobsTable extends React.Component {
 JobsTable.propTypes = {
   data: PropTypes.array.isRequired,
   loggedInUser: PropTypes.object.isRequired,
-  reloadApplications: PropTypes.func.isRequired
+  reloadApplications: PropTypes.func.isRequired,
+  reloadFavorites: PropTypes.func.isRequired
 }
 
 export default JobsTable;

@@ -61,7 +61,12 @@ class Jobs extends PureComponent {
     }
 
     fetchFavorites = () => {
-        console.log("fetch favorites")
+        (new JobService()).findFavorites(this.props.loggedInUser.id)
+            .then(d => {
+                console.log("fetch favorites")
+                this.setState({favoritesData: d})
+            });
+
     }
 
     fetchApplications = () => {
@@ -135,6 +140,7 @@ class Jobs extends PureComponent {
                                        loggedInUser = {this.props.loggedInUser}
                                        rowClickHandler={console.log("row clicked")}
                                        reloadApplications={this.fetchApplications}
+                                       reloadFavorites={this.fetchFavorites}
                             />
                         </ExpansionPanelDetails>
                     </ExpansionPanel>]}

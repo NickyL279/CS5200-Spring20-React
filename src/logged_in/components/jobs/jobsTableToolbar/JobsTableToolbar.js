@@ -8,6 +8,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import JobsListsDialog from "./JobsListsDialog";
 import JobsApplicationDialog from "./JobsApplicationDialog";
 import PropTypes from "prop-types";
+import JobService from "../../../../shared/services/JobService";
 
 const defaultToolbarSelectStyles = {
     iconButton: {},
@@ -41,19 +42,17 @@ class JobsTableToolbar extends React.Component {
     // };
 
     handleClickCreateApplication = () => {
-        console.log();
-        console.log(this.props.displayData[this.props.selectedRows.data[0]['dataIndex']]);
         const jobArray = this.props.displayData[this.props.selectedRows.data[0]['dataIndex']].data
         const initialData = {
             applicationStatus: "NEW",
             student: {
                 id: this.props.loggedInUser.id
             },
-            job:{
-            id: jobArray[0],
-            title: jobArray[1],
-            company: jobArray[2],
-            location: jobArray[3]
+            job: {
+                id: jobArray[0],
+                title: jobArray[1],
+                company: jobArray[2],
+                location: jobArray[3]
             }
         }
         this.setState({applicationInitialData: initialData})
@@ -61,9 +60,18 @@ class JobsTableToolbar extends React.Component {
     };
 
     handleClickAddToFavorites = () => {
-        console.log(`add jobs with dataIndexes to favorites: ${this.props.selectedRows.data.map(
-            row => row.dataIndex)}`);
-        alert("Added selected jobs to favorites.")
+        const favId = this.props.displayData[this.props.selectedRows.data[0]['dataIndex']].data[0];
+        let date = new Date();
+        date.setDate(date.getDate() + 7);
+
+        (new JobService()).createFavorite({
+                                              job: {id: favId},
+                                              student: {id: this.props.loggedInUser.id},
+                                              followup: date.getTime()
+                                          }).then(() => {
+            this.props.reloadFavorites()
+            alert("Added selected jobs to favorites.")
+        });
     };
 
     handleClickAddToList = () => {
@@ -90,25 +98,25 @@ class JobsTableToolbar extends React.Component {
 
                 <div className={classes.iconContainer}>
                     {this.props.loggedInUser.dtype === "Student" && [
-                    <Tooltip key="1" title={"Create Application"}>
-                        <IconButton className={classes.iconButton}
-                                    onClick={this.handleClickCreateApplication}>
-                            <AssignmentIcon className={classes.icon}/>
-                        </IconButton>
-                    </Tooltip>,
-                    <Tooltip key="2" title={"Add to Favorites"}>
-                        <IconButton className={classes.iconButton}
-                                    onClick={this.handleClickAddToFavorites}>
-                            <FavoriteBorderIcon className={classes.icon}/>
-                        </IconButton>
-                    </Tooltip>]}
+                        <Tooltip key="1" title={"Create Application"}>
+                            <IconButton className={classes.iconButton}
+                                        onClick={this.handleClickCreateApplication}>
+                                <AssignmentIcon className={classes.icon}/>
+                            </IconButton>
+                        </Tooltip>,
+                        <Tooltip key="2" title={"Add to Favorites"}>
+                            <IconButton className={classes.iconButton}
+                                        onClick={this.handleClickAddToFavorites}>
+                                <FavoriteBorderIcon className={classes.icon}/>
+                            </IconButton>
+                        </Tooltip>]}
                     {this.props.loggedInUser.dtype === "Advisor" && [
-                    <Tooltip key="3" title={"Add to List"}>
-                        <IconButton className={classes.iconButton}
-                                    onClick={this.handleClickAddToList}>
-                            <PlaylistAddIcon className={classes.icon}/>
-                        </IconButton>
-                    </Tooltip>]}
+                        <Tooltip key="3" title={"Add to List"}>
+                            <IconButton className={classes.iconButton}
+                                        onClick={this.handleClickAddToList}>
+                                <PlaylistAddIcon className={classes.icon}/>
+                            </IconButton>
+                        </Tooltip>]}
                 </div>
 
                 <JobsListsDialog handleClose={this.handleCloseJobListsDialog}
@@ -123,11 +131,13 @@ class JobsTableToolbar extends React.Component {
         );
     }
 }
+
 JobsTableToolbar.propTypes = {
     loggedInUser: PropTypes.object.isRequired,
     displayData: PropTypes.array.isRequired,
     selectedRows: PropTypes.object.isRequired,
-    reloadApplications: PropTypes.func.isRequired
+    reloadApplications: PropTypes.func.isRequired,
+    reloadFavorites: PropTypes.func.isRequired
 }
 
 export default withStyles(defaultToolbarSelectStyles, {name: "CustomToolbarSelect"})(

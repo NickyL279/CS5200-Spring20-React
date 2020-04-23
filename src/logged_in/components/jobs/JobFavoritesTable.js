@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MUIDataTable from "mui-datatables";
-// import JobService from "../../../shared/services/JobService";
+import JobService from "../../../shared/services/JobService";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
@@ -24,10 +24,10 @@ class JobFavoritesTable extends React.Component {
     }
   }
 
-  // handleDeleteRow = (rowsDeleted) => {
-  //   const userIds = rowsDeleted.data.map(row => this.state.data[row.dataIndex][0]);
-  //   userIds.forEach(id => (new UserService()).deleteUser(id).then(console.log("Deleted user " + id)))
-  // }
+  handleDeleteRow = (rowsDeleted) => {
+    const userIds = rowsDeleted.data.map(row => this.state.data[row.dataIndex][0]);
+    userIds.forEach(id => (new JobService()).deleteFavorite(id).then(console.log("Deleted favorite " + id)))
+  }
 
   render() {
 
@@ -61,6 +61,12 @@ class JobFavoritesTable extends React.Component {
         options: {
           display: false,
         }
+      },
+      {
+        name: "Followup Date",
+        options: {
+          display: true,
+        }
       }
     ];
 
@@ -69,7 +75,7 @@ class JobFavoritesTable extends React.Component {
       filterType: 'dropdown',
       // responsive: "stacked",
       rowsPerPage: 10,
-      // onRowsDelete: this.handleDeleteRow,
+      onRowsDelete: this.handleDeleteRow,
       // serverSide: true,
       pagination: true,
       print: false,

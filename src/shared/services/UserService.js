@@ -1,9 +1,7 @@
 import jsonToArray from "../functions/jsonToArray";
 
-const COURSE_API_URL= 'https://cs5200-spring2020-hartenstine.com/api/';
-// const COURSE_API_URL= 'http://localhost:8080/api/';
-// added this comment
-
+const API_URL= 'https://cs5200-spring2020-hartenstine.com/api/';
+// const API_URL= 'http://localhost:8080/api/';
 
 export default class UserService {
 
@@ -34,7 +32,7 @@ export default class UserService {
                 userUrl = "adduser"
         }
 
-        return fetch(COURSE_API_URL + userUrl, {
+        return fetch(API_URL + userUrl, {
             method: 'POST',
             body: JSON.stringify(user),
             headers: {'Content-Type':'application/json; charset=utf-8'}
@@ -44,7 +42,7 @@ export default class UserService {
     };
 
     findUserById = (userId) =>
-        fetch(COURSE_API_URL + "allUsers", {
+        fetch(API_URL + "allUsers", {
             crossDomain:true,
             method: 'GET',
             headers: {'Content-Type':'application/json; charset=utf-8'}
@@ -62,7 +60,7 @@ export default class UserService {
             });
 
     findAllUsers = () =>
-        fetch(COURSE_API_URL + "allUsers", {
+        fetch(API_URL + "allUsers", {
             crossDomain:true,
             method: 'GET',
             headers: {'Content-Type':'application/json; charset=utf-8'}
@@ -89,7 +87,7 @@ export default class UserService {
                 userUrl = "users/"
         }
 
-        return fetch(COURSE_API_URL + userUrl + userId, {
+        return fetch(API_URL + userUrl + userId, {
             method: 'PUT',
             body: JSON.stringify(user),
             headers: {'Content-Type': 'application/json; charset=utf-8'}
@@ -101,7 +99,7 @@ export default class UserService {
     }
 
     deleteUser = userId =>
-        fetch(COURSE_API_URL + "users/" + userId, {
+        fetch(API_URL + "users/" + userId, {
             crossDomain:true,
             method: 'DELETE',
             headers: {'Content-Type':'application/json; charset=utf-8'}
@@ -111,7 +109,7 @@ export default class UserService {
             });
 
     authenticateUser = (username, password) =>
-        fetch(COURSE_API_URL + "userlogin/" + username + "/" + password, {
+        fetch(API_URL + "userlogin/" + username + "/" + password, {
             crossDomain:true,
             method: 'GET',
             headers: {'Content-Type':'application/json; charset=utf-8'}
