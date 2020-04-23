@@ -105,11 +105,11 @@ class JobFavoritesTable extends React.Component {
       rowsExpanded: [],
       renderExpandableRow: (rowData/*, rowMeta*/) => {
         const colSpan = rowData.length + 1;
-        const description = rowData[4].replace("\\n", "\n");//.replace(/\n/g, "<br />");
+        const description = rowData[4].replace(/\??\?/g, "\n").replace(/\n/g, "\n\n").replace(/\n\s+\n/g, "\n")//.replace(/\?/g, "<br />");
         return (
             <TableRow>
               <TableCell colSpan={colSpan}>
-                {description}
+                <div style={{"white-space":"pre-wrap"}}>{description}</div>
               </TableCell>
             </TableRow>
         );
