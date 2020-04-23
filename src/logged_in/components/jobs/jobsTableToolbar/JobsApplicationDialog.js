@@ -1,62 +1,73 @@
 import React from "react";
-
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-// import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogActions from "@material-ui/core/DialogActions";
-import Button from "@material-ui/core/Button";
+import Styles from "../../users/UserFormStyles";
 import Dialog from "@material-ui/core/Dialog";
 import PropTypes from "prop-types";
-
+import {Field, Form} from "react-final-form";
+import StudentService from "../../../../shared/services/StudentService";
 
 class JobsApplicationDialog extends React.Component {
 
-    state = {
-        dialogValue:{title: '', year: ''}
-    }
-
-    ////-----------------------------JOBS LIST DIALOG
-
-     handleSubmit = (event) => {
-        event.preventDefault();
-        this.setState({ value:
-                {
-                    title: this.state.dialogValue.title,
-                    year: parseInt(this.state.dialogValue.year, 10),
-                }})
-        this.handleClose();
+    handleSubmit = (values) => {
+        (new StudentService()).createApplication(values).then(() => {
+            this.props.handleClose()
+        })
     };
-    //--------------------JOBS LIST DIALOG------------////
 
     render() {
-
         return (
-    <React.Fragment>
+            <React.Fragment>
+                <Dialog open={this.props.open} onClose={this.props.handleClose}
+                        aria-labelledby="form-dialog-title">
+                    <Styles>
+                        <Form onSubmit={this.handleSubmit}
+                              initialValues={this.props.initialData}
+                              render={({handleSubmit, submitting,/* pristine,  reset,*/ values, invalid}) => {
+                                  return (
+                                      <form onSubmit={handleSubmit}>
 
-        <Dialog open={this.props.open} onClose={this.props.handleClose} aria-labelledby="form-dialog-title">
-            <form onSubmit={this.props.handleSubmit}>
-                <DialogTitle id="form-dialog-title">Complete Job Application</DialogTitle>
-                <DialogContent>
-
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={this.props.handleClose} color="primary">
-                        Cancel
-                    </Button>
-                    <Button type="submit" color="primary">
-                        Submit
-                    </Button>
-                </DialogActions>
-            </form>
-        </Dialog>
-
-    </React.Fragment>
-        );
+                                          <h3>Job Application</h3>
+                                          <span>
+                                          Company: {values.job.company}
+                                              <br/>Job Title: {values.job.title}
+                                      </span>
+                                          <div key="1">
+                                              <label>Describe why you should get the job.</label>
+                                              <Field
+                                                  name="description"
+                                                  component="textarea"
+                                                  type="text"
+                                                  validate={val => val ? undefined : 'Required'}
+                                              />
+                                          </div>
+                                          <div key="2">
+                                              <label>Give the name of anyone you know within the
+                                                  company who may provide a referral.</label>
+                                              <Field
+                                                  name="referral"
+                                                  component="textarea"
+                                                  type="text"
+                                                  validate={val => val ? undefined : 'Required'}
+                                              />
+                                          </div>
+                                          <div className="buttons">
+                                              <button type="submit"
+                                                      disabled={submitting || invalid}>
+                                                  Submit Application
+                                              </button>
+                                          </div>
+                                          <pre>{JSON.stringify(values, 0, 2)}</pre>
+                                      </form>
+                                  )
+                              }}/></Styles>
+                </Dialog>
+            </React.Fragment>
+        )
     }
 }
 
 JobsApplicationDialog.propTypes = {
     handleClose: PropTypes.func.isRequired,
+    initialData: PropTypes.object.isRequired,
     open: PropTypes.bool.isRequired
 }
 

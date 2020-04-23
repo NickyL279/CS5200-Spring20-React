@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import JobsTable from "./JobsTable";
 import JobService from "../../../shared/services/JobService";
 import LinearProgress from '@material-ui/core/LinearProgress';
+import StudentService from "../../../shared/services/StudentService";
 
 import {
     ExpansionPanel,
@@ -63,7 +64,12 @@ class Jobs extends PureComponent {
     }
 
     fetchApplications = () => {
-        console.log("fetch applications")
+        (new StudentService()).fetchApplications()
+            .then(d => {
+                console.log("fetch all applications")
+                console.log(d)
+                this.setState({applicationsData: d})
+            });
     }
 
     fetchAssignedUsers = () => {
@@ -120,8 +126,9 @@ class Jobs extends PureComponent {
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails className={this.props.classes.dBlock}>
                             <JobsTable data={this.state.allJobsData}
-                                // rowClickHandler={this.handleRowClick}
+                                       loggedInUser = {this.props.loggedInUser}
                                        rowClickHandler={console.log("row clicked")}
+                                       reloadApplications={this.fetchApplications}
                             />
                         </ExpansionPanelDetails>
                     </ExpansionPanel>]}

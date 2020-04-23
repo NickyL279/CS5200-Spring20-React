@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MUIDataTable from "mui-datatables";
-// import JobService from "../../../shared/services/JobService";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-// import JobsTableToolbar from "./JobsTableToolbar";
+import StudentService from "../../../shared/services/StudentService";
 
 class JobApplicationsTable extends React.Component {
 
@@ -24,10 +23,10 @@ class JobApplicationsTable extends React.Component {
     }
   }
 
-  // handleDeleteRow = (rowsDeleted) => {
-  //   const userIds = rowsDeleted.data.map(row => this.state.data[row.dataIndex][0]);
-  //   userIds.forEach(id => (new UserService()).deleteUser(id).then(console.log("Deleted user " + id)))
-  // }
+  handleDeleteRow = (rowsDeleted) => {
+    const userIds = rowsDeleted.data.map(row => this.state.data[row.dataIndex][0]);
+    userIds.forEach(id => (new StudentService()).deleteApplication(id).then(console.log("Deleted application " + id)))
+  }
 
   render() {
 
@@ -39,27 +38,27 @@ class JobApplicationsTable extends React.Component {
         }
       },
       {
-        name: "Title",
+        name: "Name",
         options: {
           filter: true,
         }
       },
       {
-        name: "Company",
+        name: "Status",
         options: {
           filter: true,
         }
       },
       {
-        name: "Location",
+        name: "Job Title",
         options: {
-          filter: false,
+          filter: true,
         }
       },
       {
-        name: "Description",
+        name: "Job Company",
         options: {
-          display: false,
+          display: true,
         }
       }
     ];
@@ -69,7 +68,7 @@ class JobApplicationsTable extends React.Component {
       filterType: 'dropdown',
       // responsive: "stacked",
       rowsPerPage: 10,
-      // onRowsDelete: this.handleDeleteRow,
+      onRowsDelete: this.handleDeleteRow,
       // serverSide: true,
       pagination: true,
       print: false,

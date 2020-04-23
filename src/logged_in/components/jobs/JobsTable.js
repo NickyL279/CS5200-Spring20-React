@@ -77,7 +77,12 @@ class JobsTable extends React.Component {
       expandableRows: true,
       expandableRowsOnClick: true,
       customToolbarSelect: (selectedRows, displayData, setSelectedRows) => (
-          <JobsTableToolbar selectedRows={selectedRows} displayData={displayData} setSelectedRows={setSelectedRows} />
+          <JobsTableToolbar selectedRows={selectedRows}
+                            displayData={displayData}
+                            setSelectedRows={setSelectedRows}
+                            reloadApplications={this.props.reloadApplications}
+                            loggedInUser={this.props.loggedInUser}
+          />
       ),
       onTableChange: (action, tableState) => {
         console.log(action)
@@ -136,7 +141,9 @@ class JobsTable extends React.Component {
 }
 
 JobsTable.propTypes = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
+  loggedInUser: PropTypes.object.isRequired,
+  reloadApplications: PropTypes.func.isRequired
 }
 
 export default JobsTable;
