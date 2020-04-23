@@ -1,36 +1,42 @@
 import React from "react";
 import Styles from "../users/UserFormStyles";
-import { Form, Field } from "react-final-form";
-import { Radio, Select } from 'final-form-material-ui';
-import {
-    RadioGroup,
-    MenuItem,
-    FormControl,
-    FormControlLabel,
-} from '@material-ui/core';
+import {Field, Form} from "react-final-form";
+import {Radio, Select} from 'final-form-material-ui';
+import {FormControl, FormControlLabel, MenuItem, RadioGroup,} from '@material-ui/core';
 import UserService from "../../../shared/services/UserService";
-
+import PropTypes from "prop-types";
 
 class UsersEditForm extends React.Component {
 
     onSubmit = values => {
+        const selectedAdvisor = values.advisor
+        values.advisor = this.props.advisorList[selectedAdvisor]
+
         console.log("values");
         console.log(values);
         (new UserService()).updateUser(this.props.user.id, values)
-            .then(()=> {
+            .then(() => {
                       alert("User updated.")
-                this.props.datacall()
+                      this.props.datacall()
                   }
             )
     };
 
     render() {
+        let intitValues = this.props.user
+        let currentAdvisorId = null;
+        if (intitValues.advisor != null) {
+            currentAdvisorId = intitValues.advisor.id
+            intitValues.advisor =
+                this.props.advisorList.findIndex(advisor => advisor.id === currentAdvisorId)
+        }
+
         return (
             <Styles>
                 <Form
                     onSubmit={this.onSubmit}
-                    initialValues={this.props.user}
-                    render={({handleSubmit,submitting,/* pristine,  reset,*/ values, invalid}) => {
+                    initialValues={intitValues}
+                    render={({handleSubmit, submitting,/* pristine,  reset,*/ values, invalid}) => {
 
                         switch (values.dtype) {
                             case 'Student':
@@ -141,6 +147,29 @@ class UsersEditForm extends React.Component {
                                     />
                                 </div>
                                 {values.dtype === 'Student' && [
+                                    <div key="7">
+                                        <label>Advisor</label>
+                                        <Field type="text" name="advisor" component="select">
+                                            <option>---</option>
+                                            {this.props.advisorList
+                                                .map((option, index) => {
+                                                         if (values.advisor === index) {
+                                                             return (
+                                                                 <option selected="selected"
+                                                                         key={index}
+                                                                         value={index}>
+                                                                     {option.firstName} {option.lastName}
+                                                                 </option>)
+                                                         } else {
+                                                             return (<option key={index}
+                                                                             value={index}>
+                                                                 {option.firstName} {option.lastName}
+                                                             </option>)
+                                                         }
+                                                     }
+                                                )}
+                                        </Field>
+                                    </div>,
                                     <div key="5">
                                         <label>Scholarship</label>
                                         <Field
@@ -179,6 +208,10 @@ class UsersEditForm extends React.Component {
             </Styles>
         );
     }
+}
+
+UsersEditForm.propTypes = {
+    advisorList: PropTypes.array.isRequired
 }
 
 export default UsersEditForm

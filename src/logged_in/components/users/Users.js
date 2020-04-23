@@ -13,6 +13,7 @@ import {
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import withWidth from "@material-ui/core/withWidth";
 import HighlightedInformation from "../../../shared/components/HighlightedInformation";
+import AdvisorService from "../../../shared/services/AdvisorService";
 
 const styles = {
     divider: {
@@ -24,7 +25,8 @@ class Users extends PureComponent {
     state = {
         addPostPaperOpen: false,
         data: [],
-        selectedUser: undefined
+        selectedUser: undefined,
+        advisorList: []
     };
 
     handleRowClick = (userId) =>
@@ -40,15 +42,25 @@ class Users extends PureComponent {
     fetchData = () => {
         (new UserService()).findAllUsers()
             .then(d => {
-                console.log("fetch")
+                console.log("fetch all users")
                 console.log(d)
                 this.setState({data: d, selectedUser: undefined})
             })
             .then(console.log(this.state));
     }
 
+    fetchAdvisors = () =>{
+        (new AdvisorService()).findAllAdvisors()
+            .then(a => {
+                console.log("fetch all advisors")
+                console.log(a)
+                this.setState({advisorList: a})
+            })
+    }
+
     componentWillMount() {
         this.fetchData()
+        this.fetchAdvisors()
     }
 
     componentDidMount() {
@@ -70,6 +82,7 @@ class Users extends PureComponent {
                     <ExpansionPanelDetails className={this.props.classes.dBlock}>
                         {this.state.selectedUser !== undefined ? [
                         <UsersEditForm datacall={this.fetchData}
+                                       advisorList={this.state.advisorList}
                                        user={this.state.selectedUser}
                         />
                         ] : [

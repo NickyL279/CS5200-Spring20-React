@@ -75,16 +75,30 @@ export default class UserService {
                     ["id", "dtype", "firstName", "lastName", "username"]);
             });
 
-    updateUser = (userId, user) =>
-        fetch(COURSE_API_URL + "users/" + userId, {
+    updateUser = (userId, user) => {
+        let userUrl
+
+        switch(user.dtype) {
+            case 'Student':
+                userUrl = "students/"
+                break;
+            case 'Advisor':
+                userUrl = "advisors/"
+                break;
+            default:
+                userUrl = "users/"
+        }
+
+        return fetch(COURSE_API_URL + userUrl + userId, {
             method: 'PUT',
             body: JSON.stringify(user),
-            headers: {'Content-Type':'application/json; charset=utf-8'}
+            headers: {'Content-Type': 'application/json; charset=utf-8'}
         }).then(response => {
             console.log(userId)
             console.log(user)
             console.log(response);
         });
+    }
 
     deleteUser = userId =>
         fetch(COURSE_API_URL + "users/" + userId, {
