@@ -15,7 +15,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import HowToRegIcon from "@material-ui/icons/HowToReg";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 // import BookIcon from "@material-ui/icons/Book";
-// import NavigationDrawer from "../../../shared/components/NavigationDrawer";
+import NavigationDrawer from "../../../shared/components/NavigationDrawer";
 
 const styles = theme => ({
   appBar: {
@@ -44,10 +44,10 @@ function NavBar(props) {
     classes,
     openRegisterDialog,
     openLoginDialog,
-    // handleMobileDrawerOpen,
-    // handleMobileDrawerClose,
-    // mobileDrawerOpen,
-    // selectedTab
+    handleMobileDrawerOpen,
+    handleMobileDrawerClose,
+    mobileDrawerOpen,
+    selectedTab
   } = props;
   const menuItems = [
     {
@@ -92,7 +92,7 @@ function NavBar(props) {
             <Hidden mdUp>
               <IconButton
                 className={classes.menuButton}
-                onClick={console.log("NavigationDrawer open")}
+                onClick={handleMobileDrawerOpen}
                 aria-label="Open Navigation"
               >
                 <MenuIcon color="primary" />
@@ -106,7 +106,7 @@ function NavBar(props) {
                       key={element.name}
                       to={element.link}
                       className={classes.noDecoration}
-                      onClick={console.log("NavigationDrawer open")}
+                      onClick={handleMobileDrawerClose}
                     >
                       <Button
                         color="secondary"
@@ -134,22 +134,22 @@ function NavBar(props) {
           </div>
         </Toolbar>
       </AppBar>
-      {/*<NavigationDrawer*/}
-      {/*  menuItems={menuItems}*/}
-      {/*  anchor="right"*/}
-      {/*  open={console.log("NavigationDrawer open")}*/}
-      {/*  selectedItem={selectedTab}*/}
-      {/*  onClose={console.log("NavigationDrawer close")}*/}
-      {/*/>*/}
+      <NavigationDrawer
+        menuItems={menuItems}
+        anchor="right"
+        open={mobileDrawerOpen}
+        selectedItem={selectedTab}
+        onClose={handleMobileDrawerClose}
+      />
     </div>
   );
 }
 
 NavBar.propTypes = {
   classes: PropTypes.object.isRequired,
-  // handleMobileDrawerOpen: PropTypes.func,
-  // handleMobileDrawerClose: PropTypes.func,
-  // mobileDrawerOpen: PropTypes.bool,
+  handleMobileDrawerOpen: PropTypes.func,
+  handleMobileDrawerClose: PropTypes.func,
+  mobileDrawerOpen: PropTypes.bool,
   selectedTab: PropTypes.string,
   openRegisterDialog: PropTypes.func.isRequired,
   openLoginDialog: PropTypes.func.isRequired

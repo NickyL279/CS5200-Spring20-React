@@ -59,11 +59,12 @@ class Users extends PureComponent {
     }
 
     componentWillMount() {
-        this.fetchData()
-        this.fetchAdvisors()
+
     }
 
     componentDidMount() {
+        this.fetchData()
+        this.fetchAdvisors()
         const {selectPosts} = this.props;
         selectPosts();
     }
@@ -71,11 +72,12 @@ class Users extends PureComponent {
     render() {
         return (
 
-            <Fragment>
-                <UsersTable data={this.state.data}
+            <Fragment key="1">
+                <UsersTable key="2"
+                            data={this.state.data}
                             rowClickHandler={this.handleRowClick}/>
                 <br/>
-                <ExpansionPanel defaultExpanded={true}>
+                <ExpansionPanel key="3" defaultExpanded={true}>
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                         <Typography>Edit User </Typography>
                     </ExpansionPanelSummary>
@@ -86,14 +88,14 @@ class Users extends PureComponent {
                                        user={this.state.selectedUser}
                         />
                         ] : [
-                            <HighlightedInformation>
+                            <HighlightedInformation key="5">
                             Click a row in the table.
                             </HighlightedInformation>
                             ]
                         }
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
-                <ExpansionPanel>
+                <ExpansionPanel key="4">
                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon/>}>
                         <Typography>Create New User</Typography>
                     </ExpansionPanelSummary>

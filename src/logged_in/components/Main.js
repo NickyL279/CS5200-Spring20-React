@@ -23,23 +23,23 @@ const styles = theme => ({
 class Main extends PureComponent {
   state = {
     selectedTab: null,
-    CardChart: null,
-    EmojiTextArea: null,
-    ImageCropper: null,
-    Dropzone: null,
-    DateTimePicker: null,
-    transactions: [],
-    statistics: { views: [], profit: [] },
-    posts: [],
-    targets: [],
-    messages: [],
-    isAccountActivated: false,
-    addBalanceDialogOpen: false
+    // CardChart: null,
+    // EmojiTextArea: null,
+    // ImageCropper: null,
+    // Dropzone: null,
+    // DateTimePicker: null,
+    // transactions: [],
+    // statistics: { views: [], profit: [] },
+    // posts: [],
+    // targets: [],
+    // messages: [],
+    // isAccountActivated: false,
+    // addBalanceDialogOpen: false
   };
 
-  componentDidMount() {
-
-  }
+  // componentDidMount() {
+  //
+  // }
 
 
   selectDashboard = () => {
@@ -48,12 +48,12 @@ class Main extends PureComponent {
     this.setState({
       selectedTab: "Dashboard"
     });
-    if (!this.hasFetchedCardChart) {
-      this.hasFetchedCardChart = true;
-      import("../../shared/components/CardChart").then(Component => {
-        this.setState({ CardChart: Component.default });
-      });
-    }
+    // if (!this.hasFetchedCardChart) {
+    //   this.hasFetchedCardChart = true;
+    //   import("../../shared/components/CardChart").then(Component => {
+    //     this.setState({ CardChart: Component.default });
+    //   });
+    // }
   };
 
   selectPosts = () => {
@@ -62,30 +62,30 @@ class Main extends PureComponent {
     this.setState({
       selectedTab: "Posts"
     });
-    if (!this.hasFetchedEmojiTextArea) {
-      this.hasFetchedEmojiTextArea = true;
-      import("../../shared/components/EmojiTextArea").then(Component => {
-        this.setState({ EmojiTextArea: Component.default });
-      });
-    }
-    if (!this.hasFetchedImageCropper) {
-      this.hasFetchedImageCropper = true;
-      import("../../shared/components/ImageCropper").then(Component => {
-        this.setState({ ImageCropper: Component.default });
-      });
-    }
-    if (!this.hasFetchedDropzone) {
-      this.hasFetchedDropzone = true;
-      import("../../shared/components/Dropzone").then(Component => {
-        this.setState({ Dropzone: Component.default });
-      });
-    }
-    if (!this.hasFetchedDateTimePicker) {
-      this.hasFetchedDateTimePicker = true;
-      import("../../shared/components/DateTimePicker").then(Component => {
-        this.setState({ DateTimePicker: Component.default });
-      });
-    }
+    // if (!this.hasFetchedEmojiTextArea) {
+    //   this.hasFetchedEmojiTextArea = true;
+    //   import("../../shared/components/EmojiTextArea").then(Component => {
+    //     this.setState({ EmojiTextArea: Component.default });
+    //   });
+    // }
+    // if (!this.hasFetchedImageCropper) {
+    //   this.hasFetchedImageCropper = true;
+    //   import("../../shared/components/ImageCropper").then(Component => {
+    //     this.setState({ ImageCropper: Component.default });
+    //   });
+    // }
+    // if (!this.hasFetchedDropzone) {
+    //   this.hasFetchedDropzone = true;
+    //   import("../../shared/components/Dropzone").then(Component => {
+    //     this.setState({ Dropzone: Component.default });
+    //   });
+    // }
+    // if (!this.hasFetchedDateTimePicker) {
+    //   this.hasFetchedDateTimePicker = true;
+    //   import("../../shared/components/DateTimePicker").then(Component => {
+    //     this.setState({ DateTimePicker: Component.default });
+    //   });
+    // }
   };
 
   selectSubscription = () => {
@@ -102,45 +102,45 @@ class Main extends PureComponent {
       loggedInUser} = this.props;
     const {
       selectedTab,
-      ImageCropper,
-      EmojiTextArea,
-      CardChart,
-      Dropzone,
-      DateTimePicker,
-      transactions,
-      statistics,
-      posts,
-      targets,
-      isAccountActivated,
-      messages
+      // ImageCropper,
+      // EmojiTextArea,
+      // CardChart,
+      // Dropzone,
+      // DateTimePicker,
+      // transactions,
+      // statistics,
+      // posts,
+      // targets,
+      // isAccountActivated,
+      // messages
     } = this.state;
     return (
       <Fragment>
         <NavBar
           selectedTab={selectedTab}
-          messages={messages}
-          openAddBalanceDialog={this.openAddBalanceDialog}
+          // messages={messages}
+          // openAddBalanceDialog={this.openAddBalanceDialog}
           loggedInUser={loggedInUser}
           setLoggedInUser={setLoggedInUser}
         />
 
         <main className={classNames(classes.main)}>
           <Routing
-            isAccountActivated={isAccountActivated}
-            ImageCropper={ImageCropper}
-            EmojiTextArea={EmojiTextArea}
-            CardChart={CardChart}
-            Dropzone={Dropzone}
-            DateTimePicker={DateTimePicker}
-            handleNumberChange={this.handleNumberChange}
-            handleSwitchToggle={this.handleSwitchToggle}
-            handleSelectChange={this.handleSelectChange}
-            toggleAccountActivation={this.toggleAccountActivation}
-            pushMessageToSnackbar={this.pushMessageToSnackbar}
-            transactions={transactions}
-            statistics={statistics}
-            posts={posts}
-            targets={targets}
+            // isAccountActivated={isAccountActivated}
+            // ImageCropper={ImageCropper}
+            // EmojiTextArea={EmojiTextArea}
+            // CardChart={CardChart}
+            // Dropzone={Dropzone}
+            // DateTimePicker={DateTimePicker}
+            // handleNumberChange={this.handleNumberChange}
+            // handleSwitchToggle={this.handleSwitchToggle}
+            // handleSelectChange={this.handleSelectChange}
+            // toggleAccountActivation={this.toggleAccountActivation}
+            // pushMessageToSnackbar={this.pushMessageToSnackbar}
+            // transactions={transactions}
+            // statistics={statistics}
+            // posts={posts}
+            // targets={targets}
             selectDashboard={this.selectDashboard}
             selectPosts={this.selectPosts}
             selectSubscription={this.selectSubscription}

@@ -24,7 +24,7 @@ const styles = theme => ({
 class Main extends PureComponent {
   state = {
     selectedTab: null,
-    // mobileDrawerOpen: false,
+    mobileDrawerOpen: false,
     // blogPosts: [],
     dialogOpen: null,
     cookieRulesDialogOpen: false
@@ -66,17 +66,17 @@ class Main extends PureComponent {
     this.setState({ dialogOpen: "termsOfService" });
   };
 
-  // handleMobileDrawerOpen = () => {
-  //   this.setState({ mobileDrawerOpen: true });
-  // };
-  //
-  // handleMobileDrawerClose = () => {
-  //   this.setState({ mobileDrawerOpen: false });
-  // };
+  handleMobileDrawerOpen = () => {
+    this.setState({ mobileDrawerOpen: true });
+  };
 
-  // switchSelectedTab = tab => {
-  //   this.setState({ selectedTab: tab });
-  // };
+  handleMobileDrawerClose = () => {
+    this.setState({ mobileDrawerOpen: false });
+  };
+
+  switchSelectedTab = tab => {
+    this.setState({ selectedTab: tab });
+  };
 
   openChangePasswordDialog = () => {
     this.setState({ dialogOpen: "changePassword" });
@@ -96,7 +96,7 @@ class Main extends PureComponent {
       loggedInUser} = this.props;
     const {
       selectedTab,
-      // mobileDrawerOpen,
+      mobileDrawerOpen,
       // blogPosts,
       dialogOpen,
       cookieRulesDialogOpen
@@ -126,9 +126,9 @@ class Main extends PureComponent {
           selectTab={this.selectTab}
           openLoginDialog={this.openLoginDialog}
           openRegisterDialog={this.openRegisterDialog}
-          // mobileDrawerOpen={mobileDrawerOpen}
-          // handleMobileDrawerOpen={this.handleMobileDrawerOpen}
-          // handleMobileDrawerClose={this.handleMobileDrawerClose}
+          mobileDrawerOpen={mobileDrawerOpen}
+          handleMobileDrawerOpen={this.handleMobileDrawerOpen}
+          handleMobileDrawerClose={this.handleMobileDrawerClose}
           loggedInUser={loggedInUser}
           setLoggedInUser={setLoggedInUser}
         />
