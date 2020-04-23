@@ -49,7 +49,7 @@ export default class UserService {
         })
             .then(response => response.json())
             .then(response => {
-                var user = null
+                let user = null;
                 response.forEach(row => {
                     if (row.id === userId) {
                         console.log("found user");
